@@ -1,0 +1,114 @@
+.Background {
+  background-color: #3a6870;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  text-align: center;
+  background-color: #c9c9c5;
+  position: absolute;
+  width: 60%;
+  height: 80%;
+  top: 10%;
+  left: 20%;
+}
+
+.header {
+  width: 100%;
+  height: 5%;
+  background-color: #73726e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.closeButton {
+  right: 0%;
+  background-color: grey;
+  position: absolute;
+}
+
+.maintitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 70%;
+  height: 10%;
+  background-color: #969693;
+  /* Center vertically and horizontally */
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.sign {
+  float: left;
+  width: 10%;
+  height: 10%;
+  background-color: #969693;
+  /* Center vertically and horizontally */
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-left: 10%;
+}
+
+.mainheader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 5%;
+  /* Center vertically and horizontally */
+  top: 25%;
+  position: absolute;
+}
+
+.boxbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 20%;
+  height: 100%;
+  background-color: #969693;
+
+  /* Center vertically and horizontally */
+  margin-top: 2%;
+  margin-left: 3.5%;
+}
+.boxwrapper {
+
+  width: 98%;
+  height: 45%;
+  position: absolute;
+
+  /* Center vertically and horizontally */
+  bottom: 20%;
+}
+
+.footnotewrapper {
+
+  width: 100%;
+  height: 10%;
+  /* Center vertically and horizontally */
+  bottom: 0%;
+  position: absolute;
+
+}
+
+.footnote {
+  float: left;
+  width: 10%;
+  margin-left:12.5%;
+  height: 50%;
+  border-radius: 12%;
+  background-color: #c9c9c5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
