@@ -22,68 +22,71 @@ class App extends React.Component {
     console.log("test test")
   }
   render(){
-      return (<div className="Background">
-        <div className="App">
-          <div className="header">
-            Frame
-            <button className="closeButton">
-              x
-            </button>
-          </div>
-          <div className="maintitle">
-            Title
-          </div>
-          <button className="sign" onClick={this.handleSubmit}>
-            {this.state.loggedIn ? "signout" : "signin"}
-          </button>
-          <header className="mainheader">
-            My ask me anything
-          </header>
-          {this.state.loggedIn ?
-              <div className="boxwrapper">
-            <div className="boxbox">
-              box box box
+      return (
+        <div className="Background">
+            <div className="App">
+                <div className="header">
+                    Frame
+                    <button className="closeButton">x</button>
+                </div>
+
+                <div className="main-title">
+                    Title
+                </div>
+                <button className="sign" onClick={this.handleSubmit}>
+                    {this.state.loggedIn ? "signout" : "signin"}
+                </button>
+                <div className = "main-window">
+                    <header className="mainheader">
+                        My ask me anything
+                    </header>
+                    {this.state.loggedIn ?
+                        <div className="box-wrapper">
+                            <div className="boxbox">
+                                box box box
+                            </div>
+                            <div className="boxbox">
+                              box box box
+                            </div>
+                            <div className="boxbox">
+                              box box box
+                            </div>
+                            <div className="boxbox">
+                              box box box
+                            </div>
+                        </div>
+                            :
+                        <div className="boxwrapper">
+                            <form>
+                                <label>
+                                    Username:
+                                    <input className = "username-field" type = "text" name = "username" onChange = {this.myChangeHandler} />
+                                </label> <br />
+                                <label>
+                                    Password:
+                                    <input className = "password-field" type = "password" name = "password" onChange = {this.myChangeHandler} />
+                                </label> <br />
+                                <button onClick={this.handleSubmit}>Login</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+                <div className = "footnote-wrapper">
+                    <button className="footnote">
+                        github
+                    </button>
+                    <button className="footnote">
+                        email
+                    </button>
+                    <button className="footnote" >
+                        test
+                    </button>
+                    <button className="footnote">
+                        phone
+                    </button>
+                </div>
             </div>
-            <div className="boxbox">
-              box box box
-            </div>
-            <div className="boxbox">
-              box box box
-            </div>
-            <div className="boxbox">
-              box box box
-            </div>
-          </div>
-              :
-              <div className="boxwrapper">
-                <form>
-                  <label>
-                    Username:
-                    <input className = "username-field" type = "text" name = "username" onChange = {this.myChangeHandler} />
-                  </label> <br />
-                  <label>
-                    Password:
-                    <input className = "password-field" type = "password" name = "password" onChange = {this.myChangeHandler} />
-                  </label> <br />
-                  <button onClick={this.handleSubmit}>Login</button>
-                </form>
-              </div>}
-          <div className="footnotewrapper">
-            <button className="footnote">
-              github
-            </button>
-            <button className="footnote">
-              email
-            </button>
-            <button className="footnote" >
-              test
-            </button>
-            <button className="footnote">
-              phone
-            </button>
-          </div>
         </div>
-      </div>
       );
     }
 }
