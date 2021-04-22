@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 
-class AnswerWrite extends React.Component
+class WriteAnswer extends React.Component
 {
 
   constructor(props)
@@ -41,7 +41,8 @@ class AnswerWrite extends React.Component
           <header className="mainheader">
             Answer a Question
           </header>
-          <div className = "answer-question-area">
+          <br /><br />
+          <div className = "main-area">
                 <form>
                     <div>
                         <label className = "regular-text">Select a question:</label>
@@ -56,13 +57,14 @@ class AnswerWrite extends React.Component
                             <option className = "regular-text">What is the most efficient path-finding algorithm for an undirected graph?</option>
                         </select>
                     </div>
-                    <div className = "box">
-                        <span className = "regular-text">Other answers, if available, will be shown here</span>
-                    </div>
+                    <br />
+                    <span className = "regular-text">Other answers, if available, will be shown here</span>
+                    <div className = "box"></div>
+                    <br />
                     <div>
                         <label className = "regular-text">Your answer:</label>
                         <br />
-                        <input className = "text-area" type = "text" name = "answer" />
+                        <textarea name = "answer"></textarea>
                     </div>
                     <br />
                 </form>
@@ -81,4 +83,4 @@ class AnswerWrite extends React.Component
     }
 }
 
-export default AnswerWrite;
+export default WriteAnswer;

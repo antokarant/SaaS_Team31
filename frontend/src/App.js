@@ -1,5 +1,7 @@
 import './App.css';
+import WriteAnswer from './WriteAnswer';
 import React from 'react';
+import {Route, Link, BrowserRouter} from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -8,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
+      username: "Agent47"
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this. myChangeHandler = this. myChangeHandler.bind(this);
@@ -23,18 +26,23 @@ class App extends React.Component {
   }
   render(){
       return (
+
         <div className="Background">
+        <Route exact path = "/writeanswer" component = {WriteAnswer} />
             <div className="App">
                 <div className="header">
                     Frame
-                    <button className="closeButton">x</button>
+                    <button className = "closeButton">x</button>
                 </div>
 
                 <div className="main-title">
                     Title
                 </div>
-                <button className="sign" onClick={this.handleSubmit}>
-                    {this.state.loggedIn ? "signout" : "signin"}
+                <button className = "cool-btn" onClick={this.handleSubmit}>
+                    <span className = "regular-text">{this.state.loggedIn ? "Log out" : "Log in"}</span>
+                </button>
+                <button className = "cool-btn">
+                    <span className = "regular-text">{this.state.loggedIn ? this.state.username : "Sign up"}</span>
                 </button>
                 <div className = "main-window">
                     <header className="mainheader">
