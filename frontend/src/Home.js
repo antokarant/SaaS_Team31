@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import {Route, Link, BrowserRouter} from 'react-router-dom';
 
-class Signup extends React.Component
+class Home extends React.Component
 {
 
     constructor(props)
@@ -24,7 +24,7 @@ class Signup extends React.Component
 
     render()
     {
-        if(!this.state.loggedIn) return (
+        return (
             <div className = "App">
                 <div className = "main-window">
                     <header className="mainheader">
@@ -41,13 +41,18 @@ class Signup extends React.Component
                         </Link>
                     </div>
                 </div>
+                <div className = "footnote-wrapper">
+                    <button className="small-btn footnote">
+                        <span className = "regular-text">About</span>
+                    </button>
+                    <button className="small-btn footnote">
+                        <span className = "regular-text">Contact</span>
+                    </button>
+                </div>
             </div>
-        );
 
-        else return (
-            <div></div>
         );
     }
 }
 
-export default Signup;
+export default Home;

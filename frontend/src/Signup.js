@@ -47,12 +47,16 @@ class Signup extends React.Component
                     </div>
                 </div>
                 <div className = "footnote-wrapper">
-                    <button className="footnote">
-                        Submit
-                    </button>
-                    <button className="footnote">
-                        Cancel
-                    </button>
+                    <Link to = '/'>
+                        <button className="small-btn footnote">
+                            <span className = "regular-text">Submit</span>
+                        </button>
+                    </Link>
+                    <Link to = '/'>
+                        <button className="small-btn footnote">
+                            <span className = "regular-text">Cancel</span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         );

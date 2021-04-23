@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Login from './Login';
 import Layout from './Layout';
 import Home from './Home';
+import UserProfile from './UserProfile';
 import React from 'react';
 import {Route, Link, BrowserRouter} from 'react-router-dom';
 
@@ -40,6 +41,7 @@ class App extends React.Component {
             <Route exact path = "/login" component = {Login} />
             <Route exact path = "/askquestion" component = {AskQuestion} />
             <Route exact path = "/writeanswer" component = {WriteAnswer} />
+            <Route exact path = "/profile" component = {UserProfile} />
         </div>
       );
     }

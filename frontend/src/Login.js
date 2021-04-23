@@ -44,7 +44,11 @@ class Signup extends React.Component
                                         <td><input type = "text" name = "password" /></td>
                                     </tr>
                                     <br />
-                                    <button onClick = {this.handleSubmit}>Login</button>
+                                    <Link to = '/profile'>
+                                        <button className = "small-btn" onClick = {this.handleSubmit}>
+                                            <span className = "regular-text">Login</span>
+                                        </button>
+                                    </Link>
                                 </table>
                             </form>
                         </div>

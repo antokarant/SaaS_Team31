@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import {Route, Link, BrowserRouter} from 'react-router-dom';
 
 class WriteAnswer extends React.Component
 {
@@ -57,12 +58,16 @@ class WriteAnswer extends React.Component
                   </form>
               </div>
               <div className="footnote-wrapper">
-                  <button className="footnote">
-                      Answer
-                  </button>
-                  <button className="footnote">
-                      Never mind
-                  </button>
+                  <Link to = '/'>
+                      <button className="small-btn footnote">
+                          <span className = "regular-text">Answer</span>
+                      </button>
+                  </Link>
+                  <Link to = '/'>
+                      <button className="small-btn footnote">
+                          <span className = "regular-text">Never mind</span>
+                      </button>
+                  </Link>
               </div>
           </div>
       );
