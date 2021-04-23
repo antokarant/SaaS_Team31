@@ -1,5 +1,13 @@
 import './App.css';
+import WriteAnswer from './WriteAnswer';
+import AskQuestion from './AskQuestion';
+import Signup from './Signup';
+import Login from './Login';
+import Layout from './Layout';
+import Home from './Home';
+import UserProfile from './UserProfile';
 import React from 'react';
+import {Route, Link, BrowserRouter} from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -8,6 +16,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
+      username: "Agent47"
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this. myChangeHandler = this. myChangeHandler.bind(this);
@@ -22,68 +31,18 @@ class App extends React.Component {
     console.log("test test")
   }
   render(){
-      return (<div className="Background">
-        <div className="App">
-          <div className="header">
-            Frame
-            <button className="closeButton">
-              x
-            </button>
-          </div>
-          <div className="maintitle">
-            Title
-          </div>
-          <button className="sign" onClick={this.handleSubmit}>
-            {this.state.loggedIn ? "signout" : "signin"}
-          </button>
-          <header className="mainheader">
-            My ask me anything
-          </header>
-          {this.state.loggedIn ?
-              <div className="boxwrapper">
-            <div className="boxbox">
-              box box box
+      return (
+        <div className="Background">
+            <div className = "layout">
+                <Layout loggedIn = {this.state.loggedIn}/>
             </div>
-            <div className="boxbox">
-              box box box
-            </div>
-            <div className="boxbox">
-              box box box
-            </div>
-            <div className="boxbox">
-              box box box
-            </div>
-          </div>
-              :
-              <div className="boxwrapper">
-                <form>
-                  <label>
-                    Username:
-                    <input className = "username-field" type = "text" name = "username" onChange = {this.myChangeHandler} />
-                  </label> <br />
-                  <label>
-                    Password:
-                    <input className = "password-field" type = "password" name = "password" onChange = {this.myChangeHandler} />
-                  </label> <br />
-                  <button onClick={this.handleSubmit}>Login</button>
-                </form>
-              </div>}
-          <div className="footnotewrapper">
-            <button className="footnote">
-              github
-            </button>
-            <button className="footnote">
-              email
-            </button>
-            <button className="footnote" >
-              test
-            </button>
-            <button className="footnote">
-              phone
-            </button>
-          </div>
+            <Route exact path = "/" component = {Home} />
+            <Route exact path = "/signup" component = {Signup} />
+            <Route exact path = "/login" component = {Login} />
+            <Route exact path = "/askquestion" component = {AskQuestion} />
+            <Route exact path = "/writeanswer" component = {WriteAnswer} />
+            <Route exact path = "/profile" component = {UserProfile} />
         </div>
-      </div>
       );
     }
 }
