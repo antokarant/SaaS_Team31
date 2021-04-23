@@ -1,7 +1,7 @@
 import './App.css';
 import WriteAnswer from './WriteAnswer';
 import React from 'react';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
 class AskQuestion extends React.Component
 {
@@ -10,14 +10,15 @@ class AskQuestion extends React.Component
     {
         super(props);
         this.state = {
-            loggedIn: false,
+            loggedIn: props.loggedIn,
             username: "Agent47"
         };
+        console.log("test")
     }
 
     render()
     {
-        return (
+        if(this.state.loggedIn) return (
             <div className="App">
                 <div className = "main-window">
                     <header className="mainheader">
@@ -50,6 +51,9 @@ class AskQuestion extends React.Component
                     </Link>
                 </div>
             </div>
+        );
+        else return(
+            <Redirect to = "/"/>
         );
     }
 }

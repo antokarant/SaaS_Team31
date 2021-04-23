@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
 class WriteAnswer extends React.Component
 {
@@ -9,7 +9,7 @@ class WriteAnswer extends React.Component
   {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: props.loggedIn,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this. myChangeHandler = this. myChangeHandler.bind(this);
@@ -24,8 +24,10 @@ class WriteAnswer extends React.Component
     console.log("test test")
   }
   render(){
-      return (
+      if(this.state.loggedIn) return (
         <div className="App">
+            <div className = "main-window">
+
             <header className="mainheader">
                 Answer a Question
             </header>
@@ -56,8 +58,10 @@ class WriteAnswer extends React.Component
                       </div>
                       <br />
                   </form>
-              </div>
-              <div className="footnote-wrapper">
+            </div>
+                </div >
+
+                <div className="footnote-wrapper">
                   <Link to = '/'>
                       <button className="small-btn footnote">
                           <span className = "regular-text">Answer</span>
@@ -70,6 +74,9 @@ class WriteAnswer extends React.Component
                   </Link>
               </div>
           </div>
+      );
+      else return (
+          <Redirect to = "/"/>
       );
     }
 }
