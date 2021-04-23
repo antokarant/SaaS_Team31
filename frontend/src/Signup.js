@@ -10,9 +10,14 @@ class Signup extends React.Component
         super(props);
         this.state = {
             loggedIn: props.loggedIn,
-            username: "Agent47"
+            username: "Agent47",
+            givenName: undefined,
+            givenPassword: undefined,
+            givenPassword2: undefined,
+            error: false,
         };
         this.sendData = this.sendData.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
     }
     componentDidUpdate(prevProps) {
@@ -23,9 +28,22 @@ class Signup extends React.Component
 
     }
     sendData = (event) => {
-
         event.preventDefault()
-        this.props.action();
+        if((!(this.state.givenName && this.state.givenPassword && this.state.givenPassword2)) || !(this.state.givenPassword === this.state.givenPassword2)){
+            this.setState({error: true})
+            // alert("message")
+        }else {
+            this.props.action();
+        }
+    }
+    handleChange(event)
+    {
+        let target = event.target;
+        let value = target.value;
+// must check for type if datatypes are different, here both are strings
+        let name = target.name;
+
+        this.setState({ [name]: value });
     }
 
     render()
@@ -38,29 +56,34 @@ class Signup extends React.Component
                         Sign up
                     </header>
                     <div className = "main-area">
+
                         <div className = "user-form">
                             <form>
                                 <table>
                                     <tr>
                                         <td><label className = "regular-text">User name (e-mail):</label></td>
-                                        <td><input type = "text" name = "username" /></td>
+                                        <td><input type = "text"  name = "givenName" value={this.state.givenName} onChange={this.handleChange} /></td>
                                     </tr>
                                     <br />
                                     <tr>
                                         <td><label className = "regular-text">Password:</label></td>
-                                        <td><input type = "text" name = "password1" /></td>
+                                        <td><input type = "text" name = "givenPassword" value={this.state.givenPassword} onChange={this.handleChange} /></td>
                                     </tr>
                                     <br />
                                     <tr>
                                         <td><label className = "regular-text">Re-enter password:</label></td>
-                                        <td><input type = "text" name = "password2" /></td>
+                                        <td><input type = "text" name = "givenPassword2" value={this.state.givenPassword2} onChange={this.handleChange} /></td>
                                     </tr>
                                     <br />
+                                    <tr>{this.state.error?"You need to give username and password and passwords must match":""}</tr>
+
                                 </table>
                             </form>
                         </div>
                     </div>
+
                 </div>
+
                 <div className = "footnote-wrapper">
                         <button className="small-btn footnote" onClick = {this.sendData}>
                             <span className = "regular-text">Submit</span>

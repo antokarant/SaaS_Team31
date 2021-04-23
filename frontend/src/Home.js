@@ -41,14 +41,7 @@ class Home extends React.Component
                         </Link>
                     </div>
                 </div>
-                <div className = "footnote-wrapper">
-                    <button className="small-btn footnote">
-                        <span className = "regular-text">About</span>
-                    </button>
-                    <button className="small-btn footnote">
-                        <span className = "regular-text">Contact</span>
-                    </button>
-                </div>
+
             </div>
 
         );

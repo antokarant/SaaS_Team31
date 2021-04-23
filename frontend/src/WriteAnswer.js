@@ -26,6 +26,8 @@ class WriteAnswer extends React.Component
   render(){
       if(this.state.loggedIn) return (
         <div className="App">
+            <div className = "main-window">
+
             <header className="mainheader">
                 Answer a Question
             </header>
@@ -56,8 +58,10 @@ class WriteAnswer extends React.Component
                       </div>
                       <br />
                   </form>
-              </div>
-              <div className="footnote-wrapper">
+            </div>
+                </div >
+
+                <div className="footnote-wrapper">
                   <Link to = '/'>
                       <button className="small-btn footnote">
                           <span className = "regular-text">Answer</span>

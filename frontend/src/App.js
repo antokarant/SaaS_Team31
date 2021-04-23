@@ -59,6 +59,14 @@ class App extends React.Component {
             <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn}/>} />
             <Route exact path = "/writeanswer" render={props => <WriteAnswer  loggedIn={this.state.loggedIn}/>} />
             <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
+
+            <div className="media">
+                <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
+                <a className="myLink" href="https://www.gmail.com">email</a>
+                <a className="myLink" href="https://www.ece.ntua.gr/en">contact us</a>
+                <a className="myLink" href="https://en.wikipedia.org/wiki/Documentation">documentation</a>
+                <a className="myLink" href="https://courses.pclab.ece.ntua.gr/course/view.php?id=34">course materials</a>
+            </div>
         </div>
 
 
