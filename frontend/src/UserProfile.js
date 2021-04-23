@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
 class UserProfile extends React.Component
 {
@@ -9,7 +9,7 @@ class UserProfile extends React.Component
     {
         super(props);
         this.state = {
-            loggedIn: false,
+            loggedIn: props.loggedIn,
             username: "Agent47"
         };
 
@@ -24,7 +24,7 @@ class UserProfile extends React.Component
 
     render()
     {
-        return (
+        if(this.state.loggedIn) return (
             <div className = "App">
                 <div className = "main-window">
                     <header className="mainheader">
@@ -51,6 +51,9 @@ class UserProfile extends React.Component
                 </div>
             </div>
 
+        );
+        else return (
+            <Redirect to = "/"/>
         );
     }
 }

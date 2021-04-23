@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter, withRouter, Redirect} from 'react-router-dom';
+
 
 class Signup extends React.Component
 {
@@ -9,19 +10,30 @@ class Signup extends React.Component
     {
         super(props);
         this.state = {
-            loggedIn: false,
+            loggedIn: props.loggedIn,
             username: "Agent47"
         };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
 
-    handleSubmit()
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.sendData = this.sendData.bind(this);
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.loggedIn !== this.props.loggedIn) {
+            this.setState({loggedIn: this.props.loggedIn})
+        }
+
+    }
+    handleSubmit = () =>
     {
-        this.setState({loggedIn : true});
+        localStorage.setItem('token', "tokenForAgent47");
         return ;
     }
+    sendData = (event) => {
 
+        event.preventDefault()
+        this.props.action();
+    }
     render()
     {
         if(!this.state.loggedIn) return (
@@ -45,7 +57,7 @@ class Signup extends React.Component
                                     </tr>
                                     <br />
                                     <Link to = '/profile'>
-                                        <button className = "small-btn" onClick = {this.handleSubmit}>
+                                        <button className = "small-btn"  onClick = {this.sendData}>
                                             <span className = "regular-text">Login</span>
                                         </button>
                                     </Link>
@@ -58,7 +70,7 @@ class Signup extends React.Component
         );
 
         else return (
-            <div></div>
+            <Redirect to = "/"/>
         );
     }
 }

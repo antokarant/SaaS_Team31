@@ -7,7 +7,7 @@ import Layout from './Layout';
 import Home from './Home';
 import UserProfile from './UserProfile';
 import React from 'react';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -15,11 +15,14 @@ class App extends React.Component {
   {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: !(localStorage.getItem('token')==='null' ),
       username: "Agent47"
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this. myChangeHandler = this. myChangeHandler.bind(this);
+    this.myChangeHandler = this.myChangeHandler.bind(this);
+    this.loginCallbackFunction = this.loginCallbackFunction.bind(this);
+    this.logoutCallbackFunction = this.logoutCallbackFunction.bind(this);
+
   }
   handleSubmit(){
     if(this.state.loggedIn===false)
@@ -30,21 +33,37 @@ class App extends React.Component {
   myChangeHandler(){
     console.log("test test")
   }
+  loginCallbackFunction = () => {
+      localStorage.setItem('token', 'tokenForAgent47');
+      this.setState({loggedIn: true})
+
+  }
+  logoutCallbackFunction = () => {
+      localStorage.setItem('token', 'null');
+      this.setState({loggedIn: false})
+  }
+/*<button onClick={()=>console.log(this.state.loggedIn)}></button>
+<button onClick={()=>console.log(localStorage.getItem('token'))}></button> gia elegxo mesa sto render*/
   render(){
+
       return (
         <div className="Background">
+
+
             <div className = "layout">
-                <Layout loggedIn = {this.state.loggedIn}/>
+                <Layout loggedIn = {this.state.loggedIn} logout={this.logoutCallbackFunction}/>
             </div>
-            <Route exact path = "/" component = {Home} />
-            <Route exact path = "/signup" component = {Signup} />
-            <Route exact path = "/login" component = {Login} />
-            <Route exact path = "/askquestion" component = {AskQuestion} />
-            <Route exact path = "/writeanswer" component = {WriteAnswer} />
-            <Route exact path = "/profile" component = {UserProfile} />
+            <Route exact path = "/" render={props => <Home  loggedIn={this.state.loggedIn}/>} />
+            <Route exact path = "/signup"  render={props => <Signup action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>}/>
+            <Route exact path = "/login" render={props => <Login action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+            <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn}/>} />
+            <Route exact path = "/writeanswer" render={props => <WriteAnswer  loggedIn={this.state.loggedIn}/>} />
+            <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
         </div>
+
+
       );
-    }
-}
+    };
+};
 
 export default App;

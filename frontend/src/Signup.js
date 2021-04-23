@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
 class Signup extends React.Component
 {
@@ -9,13 +9,28 @@ class Signup extends React.Component
     {
         super(props);
         this.state = {
-            loggedIn: false,
+            loggedIn: props.loggedIn,
             username: "Agent47"
         };
+        this.sendData = this.sendData.bind(this);
+
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.loggedIn !== this.props.loggedIn) {
+            this.setState({loggedIn: this.props.loggedIn})
+
+        }
+
+    }
+    sendData = (event) => {
+
+        event.preventDefault()
+        this.props.action();
     }
 
     render()
     {
+        if(!this.state.loggedIn)
         return (
             <div className="App">
                 <div className = "main-window">
@@ -47,11 +62,10 @@ class Signup extends React.Component
                     </div>
                 </div>
                 <div className = "footnote-wrapper">
-                    <Link to = '/'>
-                        <button className="small-btn footnote">
+                        <button className="small-btn footnote" onClick = {this.sendData}>
                             <span className = "regular-text">Submit</span>
                         </button>
-                    </Link>
+
                     <Link to = '/'>
                         <button className="small-btn footnote">
                             <span className = "regular-text">Cancel</span>
@@ -59,6 +73,9 @@ class Signup extends React.Component
                     </Link>
                 </div>
             </div>
+        );
+        else return (
+            <Redirect to = "/"/>
         );
     }
 }
