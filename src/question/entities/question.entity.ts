@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Answer } from '../../answer/entities/answer.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity()
 export class Question {
@@ -10,11 +11,15 @@ export class Question {
     title: string;
 
     @Column({ default: 0 })
-    positiveVotes: number;
+    upvotes: number;
 
     @Column({ default: 0 })
-    negativeVotes: number;
+    downvotes: number;
 
     @OneToMany(type => Answer, answer => answer.question) // answer.question is foreign key
     answers: Answer[];
+
+    @ManyToOne( () => User, user => user.questions, { nullable: true, onDelete: "CASCADE" }) // delete all answers if the question is deleted
+    @JoinColumn({name : 'userID'})
+    user: User;
 }

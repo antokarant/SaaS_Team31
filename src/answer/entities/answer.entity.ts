@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Question } from '../../question/entities/question.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity()
 export class Answer {
@@ -19,4 +20,7 @@ export class Answer {
     @JoinColumn({name : 'questionID'})
     question: Question;
 
+    @ManyToOne( () => User, user => user.questions, { nullable: true, onDelete: "CASCADE" }) // delete all answers if the question is deleted
+    @JoinColumn({name : 'userID'})
+    user: User;
 }

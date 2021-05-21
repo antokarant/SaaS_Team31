@@ -5,6 +5,7 @@ import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
 import { Answer } from './entities/answer.entity';
 import { Question } from '../question/entities/question.entity';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class AnswerService {
@@ -16,8 +17,15 @@ export class AnswerService {
             if(!questionID) throw new BadRequestException('Question id missing.');
             const question = await this.manager.findOne(Question, createAnswerDto.question.id);
             if(!question) throw new NotFoundException(`Question ${questionID} not found.`);
+
+            const userID = createAnswerDto.user.id;
+            if(!userID) throw new BadRequestException('User id missing.');
+            const user = await this.manager.findOne(User, createAnswerDto.user.id);
+            if(!user) throw new NotFoundException(`User ${userID} not found.`);
+
             const answer = await this.manager.create(Answer, createAnswerDto);
             answer.question = question;
+            answer.user = user;
             return this.manager.save(answer);
         });
     }
