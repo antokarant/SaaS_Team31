@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, ManyToMany, JoinColumn } from 'typeorm';
 import { Answer } from '../../answer/entities/answer.entity';
 import { User } from '../../user/entities/user.entity';
+import { Keyword } from '../../keyword/entities/keyword.entity';
 
 @Entity()
 export class Question {
@@ -22,4 +23,8 @@ export class Question {
     @ManyToOne( () => User, user => user.questions, { nullable: true, onDelete: "CASCADE" }) // delete all answers if the question is deleted
     @JoinColumn({name : 'userID'})
     user: User;
+
+    @ManyToOne( () => Keyword, keyword => keyword.questions) // answer.question is foreign key
+    @JoinColumn({name: 'keywordName'})
+    keyword: Keyword;
 }
