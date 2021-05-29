@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, ManyToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, ManyToMany, JoinColumn } from 'typeorm';
 import { Answer } from '../../answer/entities/answer.entity';
 import { User } from '../../user/entities/user.entity';
 import { Keyword } from '../../keyword/entities/keyword.entity';
@@ -7,6 +7,12 @@ import { Keyword } from '../../keyword/entities/keyword.entity';
 export class Question {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @CreateDateColumn()
+    createdOn: Date
+
+    @UpdateDateColumn()
+    updatedOn: Date;
 
     @Column()
     title: string;

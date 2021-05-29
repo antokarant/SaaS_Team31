@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Question } from '../../question/entities/question.entity';
 import { User } from '../../user/entities/user.entity';
 
@@ -6,6 +6,12 @@ import { User } from '../../user/entities/user.entity';
 export class Answer {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @CreateDateColumn()
+    createdOn: Date
+
+    @UpdateDateColumn()
+    updatedOn: Date;
 
     @Column()
     text: string;

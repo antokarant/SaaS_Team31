@@ -8,14 +8,14 @@ import { UserModule } from './user/user.module';
 import { KeywordModule } from './keyword/keyword.module';
 
 @Module({
-  imports: [
-      QuestionModule,
-      TypeOrmModule.forRoot(),
-      AnswerModule,
-      UserModule,
-      KeywordModule // uses ormconfig.json
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        QuestionModule,
+        TypeOrmModule.forRoot(),
+        AnswerModule,
+        UserModule,
+        KeywordModule // uses ormconfig.json
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
