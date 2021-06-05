@@ -32,7 +32,9 @@ class Home extends React.Component
                     </header>
                     <div className = "main-area">
                         <div className = "big-box">Questions per keyword</div>
-                        <div className = "big-box">Questions per day</div>
+                        <Link to = "/questions">
+                            <div className = "big-box">Questions per day</div>
+                        </Link>
                         <Link to = "/askquestion">
                             <div className = "big-box"><span className = "regular-text">Ask a question</span></div>
                         </Link>
