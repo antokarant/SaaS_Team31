@@ -7,6 +7,11 @@ export class CreateQuestionDto {
     @IsString()
     @IsNotEmpty()
     readonly title: string;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly description: string;
+
     readonly user: User;
     //@IsOptional()
     readonly keyword: Keyword;

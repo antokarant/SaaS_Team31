@@ -17,6 +17,9 @@ export class Question {
     @Column()
     title: string;
 
+    @Column()
+    description: string;
+
     @Column({ default: 0 })
     upvotes: number;
 
