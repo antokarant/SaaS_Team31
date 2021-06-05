@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnswerModule } from './answer/answer.module';
 import { UserModule } from './user/user.module';
 import { KeywordModule } from './keyword/keyword.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
     imports: [
@@ -13,7 +14,8 @@ import { KeywordModule } from './keyword/keyword.module';
         TypeOrmModule.forRoot(),
         AnswerModule,
         UserModule,
-        KeywordModule // uses ormconfig.json
+        KeywordModule,
+        CommentModule // uses ormconfig.json
     ],
     controllers: [AppController],
     providers: [AppService],

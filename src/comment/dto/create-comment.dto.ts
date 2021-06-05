@@ -1,12 +1,12 @@
 import { IsString, IsNotEmpty } from 'class-validator';
-import { Question } from '../../question/entities/question.entity';
+import { Answer } from '../../answer/entities/answer.entity';
 import { User } from '../../user/entities/user.entity';
 
-export class CreateAnswerDto {
+export class CreateCommentDto {
     @IsString()
     @IsNotEmpty()
     readonly text: string;
-    
-    readonly question: Question;
+
+    readonly answer: Answer;
     readonly user: User;
 }
