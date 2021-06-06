@@ -14,10 +14,17 @@ class AllQuestions extends React.Component
             loggedIn: props.loggedIn,
             username: "Agent47",
             questions: null,
-            responseReceived: false
+            responseReceived: false,
+            sessionData: null
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.fetchQuestions = this.fetchQuestions.bind(this);
+        this.displayQuestions = this.displayQuestions.bind(this);
+    }
+
+    componentDidMount()
+    {
         this.fetchQuestions();
     }
 
@@ -46,26 +53,19 @@ class AllQuestions extends React.Component
         .catch(error => {
             // handle error
             console.log(error);
-        })
-        .then( foo => {
-            // always executed
-            /*
-            return (
-                <div>{this.state.sessionData[0]}</div>
-            );
-            */
         });
     }
 
     displayQuestions()
     {
+        console.log("inside display");
         return (
             <div>
             {
                 this.state.sessionData.map(function(dict, index){
                     return (
                         // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div><span className = "link">{JSON.stringify(dict["title"])}</span> by <span className = "link">{JSON.stringify(dict["user"]["username"])}</span></div>
+                        <div key = {JSON.stringify(dict["id"])}><span className = "link">{JSON.stringify(dict["title"])}</span> by <span className = "link">{JSON.stringify(dict["user"]["username"])}</span></div>
                     );
                 })
             }
@@ -81,9 +81,10 @@ class AllQuestions extends React.Component
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>
+                <Link to = "/">button</Link>
             </div>
         );
-        else return(
+        else return (
             <Redirect to = "/"/>
         );
     }
