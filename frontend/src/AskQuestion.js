@@ -14,6 +14,7 @@ class AskQuestion extends React.Component
             loggedIn: props.loggedIn,
             username: "Agent47",
             questionTitle: null,
+            questionText: null,
             keywords: null
         };
 
@@ -35,13 +36,14 @@ class AskQuestion extends React.Component
         e.preventDefault();
 
         // connect with backend function
-        if(this.state.questionTitle && this.state.keywords)
+        if(this.state.questionTitle && this.state.questionText && this.state.keywords)
         {
             // connect with backend function - send request
             let url = `http://localhost:5000/question`;
 
             axios.post(url, {
                 title: this.state.questionTitle,
+                description: this.state.questionText,
                 user: {id: 1},
                 keyword: {name: this.state.keywords}
             })

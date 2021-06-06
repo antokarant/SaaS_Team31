@@ -65,7 +65,7 @@ class AllQuestions extends React.Component
                 this.state.sessionData.map(function(dict, index){
                     return (
                         // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div>{JSON.stringify(dict["title"])} by {JSON.stringify(dict["user"]["username"])}</div>
+                        <div><span className = "link">{JSON.stringify(dict["title"])}</span> by <span className = "link">{JSON.stringify(dict["user"]["username"])}</span></div>
                     );
                 })
             }

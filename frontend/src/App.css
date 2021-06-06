@@ -94,13 +94,15 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.user-form{
+
+.user-form {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     height: 100%;
 }
+
 .cool-btn:hover {
     background-color: var(--secondary-deep);
 }
@@ -271,4 +273,9 @@ textarea {
 
 .big-box:hover {
     background-color: var(--secondary-deep);
+}
+
+.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
