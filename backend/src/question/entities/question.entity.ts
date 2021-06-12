@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, ManyToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
 import { Answer } from '../../answer/entities/answer.entity';
 import { User } from '../../user/entities/user.entity';
 import { Keyword } from '../../keyword/entities/keyword.entity';
@@ -33,7 +33,8 @@ export class Question {
     @JoinColumn({name : 'userID'})
     user: User;
 
-    @ManyToOne( () => Keyword, keyword => keyword.questions) // answer.question is foreign key
-    @JoinColumn({name: 'keywordName'})
-    keyword: Keyword;
+    // SEE https://orkhan.gitbook.io/typeorm/docs/many-to-many-relations
+    @ManyToMany( () => Keyword, keyword => keyword.questions)
+    @JoinTable()
+    keywords: Keyword[];
 }

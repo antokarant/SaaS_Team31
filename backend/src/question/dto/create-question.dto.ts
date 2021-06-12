@@ -14,5 +14,5 @@ export class CreateQuestionDto {
 
     readonly user: User;
     //@IsOptional()
-    readonly keyword: Keyword;
+    readonly keywords: Keyword[];
 }

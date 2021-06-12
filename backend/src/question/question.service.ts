@@ -18,14 +18,19 @@ export class QuestionService {
             const user = await this.manager.findOne(User, createQuestionDto.user.id);
             if(!user) throw new NotFoundException(`User ${userID} not found.`);
 
-            const keywordName = createQuestionDto.keyword.name;
-            if(!keywordName) throw new BadRequestException('Keyword name missing.');
-            const keyword = await this.manager.findOne(Keyword, createQuestionDto.keyword.name);
-            if(!keyword) throw new NotFoundException(`Keyword ${keywordName} not found.`);
+            let keywordList = [];
+            for(const kw of createQuestionDto.keywords)
+            {
+                const keywordName = kw.name;
+                if(!keywordName) throw new BadRequestException('Keyword name missing.');
+                const keyword = await this.manager.findOne(Keyword, keywordName);
+                if(!keyword) throw new NotFoundException(`Keyword ${keywordName} not found.`);
+                keywordList.push(keyword);
+            }
 
             const question = await this.manager.create(Question, createQuestionDto);
             question.user = user;
-            question.keyword = keyword;
+            question.keywords = keywordList;
             return this.manager.save(question);
         });
     }
