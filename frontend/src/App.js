@@ -9,6 +9,11 @@ import AllQuestions from './AllQuestions';
 import UserProfile from './UserProfile';
 import React from 'react';
 import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
+import axios from 'axios';
+import querystring from 'querystring';
+import Profile from './Profile';
+import MyQuestionsAnswers from './MyQuestionsAnswers';
+import Question from './Question';
 
 class App extends React.Component {
 
@@ -16,14 +21,32 @@ class App extends React.Component {
     {
         super(props);
         this.state = {
-            loggedIn: !(localStorage.getItem('token')==='null' ),
-            username: "Agent47"
+            loggedIn: false,
+            username: null
+            
         };
+        this.componentDidMount = this.componentDidMount.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.myChangeHandler = this.myChangeHandler.bind(this);
         this.loginCallbackFunction = this.loginCallbackFunction.bind(this);
         this.logoutCallbackFunction = this.logoutCallbackFunction.bind(this);
+        this.LoginProcess = this.LoginProcess.bind(this);
 
+    }
+    componentDidMount() {
+        console.log("hello there" + document.cookie)
+        let token = localStorage.getItem("token")
+        console.log("test" + token)
+        if (token === null || !token) {
+            console.log("hello there")
+
+            this.setState({loggedIn: false})
+        }
+        else{
+            console.log("option2")
+            let username = localStorage.getItem('username')
+            this.setState({loggedIn: true, username: username})
+        }
     }
     handleSubmit(){
         if(this.state.loggedIn===false)
@@ -34,43 +57,145 @@ class App extends React.Component {
     myChangeHandler(){
         console.log("test test")
     }
-    loginCallbackFunction = () => {
-        localStorage.setItem('token', 'tokenForAgent47');
+    loginCallbackFunction = (username) => {
         this.setState({loggedIn: true})
+        this.setState({"username": username})
+        localStorage.setItem('username', username)
 
     }
     logoutCallbackFunction = () => {
-        localStorage.setItem('token', 'null');
+        //console.log(document.cookie)
+        var mydate = new Date();
+        localStorage.removeItem("token") 
         this.setState({loggedIn: false})
     }
     /*<button onClick={()=>console.log(this.state.loggedIn)}></button>
     <button onClick={()=>console.log(localStorage.getItem('token'))}></button> gia elegxo mesa sto render*/
     render(){
+        console.log("mytimenow" +this.state.loggedIn)
+    
+        if(this.state.loggedIn){
+            return (
+            <div className = "Background">
+                {console.log(document.cookie)}
+                <div className = "layout">
+                    <div>
+                        <div className="header">
+                            <Link to = "/" className="closeButton">
+                            <button className="test">x</button>
+                            </Link>
+                        </div>
+                        <div className="main-title">
+                            Q2A
+                        </div>
+                        <Link to="/">
+                            <span className="regular-text">
+                                <button onClick={this.logoutCallbackFunction} className="cool-btn">Log out</button>
+                            </span>
+                        </Link>
+                        <Link to = "/myprofile">
+                            <button className = "cool-btn">
+                                {this.state.username}
+                            </button>
+                        </Link>
+                    </div>
+                </div>
 
-        return (
-        <div className = "Background">
-            <div className = "layout">
-                <Layout loggedIn = {this.state.loggedIn} logout={this.logoutCallbackFunction}/>
+                <Route exact path = "/" render={props => <Home  loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/signup"  render={props => <Signup  loggedIn={this.state.loggedIn}/>}/>
+                <Route exact path = "/login" render={props => <Login action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn} action={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/writeanswer" render={props => <WriteAnswer  loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/myprofile" render={props => <Profile  />} />
+                <Route exact path = "/myquestionsanswers" render={props => <MyQuestionsAnswers  action={this.logoutCallbackFunction}/>} />
+                <Route path = "/question/:id" render={(props) => <Question {...props} action={this.logoutCallbackFunction}/>} />
+
+
+
+                <div className="media">
+                    <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
+                    <a className="myLink" href="https://www.gmail.com">email</a>
+                    <a className="myLink" href="https://www.ece.ntua.gr/en">contact us</a>
+                    <a className="myLink" href="https://en.wikipedia.org/wiki/Documentation">documentation</a>
+                    <a className="myLink" href="https://courses.pclab.ece.ntua.gr/course/view.php?id=34">course materials</a>
+                </div>
             </div>
+            );
+        }
+        else return(
+            <div className = "Background">
+                {console.log(document.cookie)}
 
-            <Route exact path = "/" render={props => <Home  loggedIn={this.state.loggedIn}/>} />
-            <Route exact path = "/signup"  render={props => <Signup action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>}/>
-            <Route exact path = "/login" render={props => <Login action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
-            <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn}/>} />
-            <Route exact path = "/writeanswer" render={props => <WriteAnswer  loggedIn={this.state.loggedIn}/>} />
-            <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
-            <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
+                <div className = "layout">
+                    <div>
+                        <div className="header">
+                            <Link to = "/" className="closeButton">
+                            <button className="test">x</button>
+                            </Link>
+                        </div>
+                        <div className="main-title">
+                            Q2A
+                        </div>
+                        <Link to="/login">
+                            <span className="regular-text">
+                                <button className="cool-btn">Log in</button>
+                            </span>
+                        </Link>
+                        <Link to = "/signup">
 
-            <div className="media">
-                <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
-                <a className="myLink" href="https://www.gmail.com">email</a>
-                <a className="myLink" href="https://www.ece.ntua.gr/en">contact us</a>
-                <a className="myLink" href="https://en.wikipedia.org/wiki/Documentation">documentation</a>
-                <a className="myLink" href="https://courses.pclab.ece.ntua.gr/course/view.php?id=34">course materials</a>
+                        <button className = "cool-btn">
+                        Sign up
+                        </button>
+                        </Link>
+                    </div>
+                </div>
+
+                <Route exact path = "/" render={props => <Home  loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/signup"  render={props => <Signup  loggedIn={this.state.loggedIn}/>}/>
+                <Route exact path = "/login" render={props => <Login action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/askquestion" render={props => <Login  loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/writeanswer" render={props => <Login  loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
+
+                <div className="media">
+                    <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
+                    <a className="myLink" href="https://www.gmail.com">email</a>
+                    <a className="myLink" href="https://www.ece.ntua.gr/en">contact us</a>
+                    <a className="myLink" href="https://en.wikipedia.org/wiki/Documentation">documentation</a>
+                    <a className="myLink" href="https://courses.pclab.ece.ntua.gr/course/view.php?id=34">course materials</a>
+                </div>
             </div>
-        </div>
-        );
+            );
     };
-};
+    LoginProcess(){
+        let url = `http://localhost:5000/auth/login`;
+        axios.post(url,
+            querystring.stringify({
+                "username": this.state.givenName,
+                "password": this.state.givenPassword
+            }),
+            ).then(res => {
+                    console.log("we are here")
+                    let obj = res.data;
+                    JSON.stringify(obj)
+                    console.log(obj.access_token)
+                    this.setState({token: obj.access_token})
+                    console.log(this.state.token)
+                    document.cookie = obj.access_token;
+                    if(obj.access_token)
+                            this.setState({loggedIn: true,})
 
+        })
+        .catch(error => {
+            this.setState({token: null, loggedIn: false})
+        });
+        return ;
+    }
+
+
+
+}
 export default App;

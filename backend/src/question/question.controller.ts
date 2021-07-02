@@ -1,20 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
+import { JwtAuthGuard } from '../jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
   @Post()
-  create(@Body() createQuestionDto: CreateQuestionDto) {
+  create(@Body() createQuestionDto: CreateQuestionDto,@Request() req) {
+    console.log(createQuestionDto)
+    createQuestionDto.user = {"id": req.user.id}
+    console.log(createQuestionDto)
     return this.questionService.create(createQuestionDto);
   }
-
   @Get()
-  findAll() {
-    return this.questionService.findAll();
+  findAll(@Request() req) {
+    return this.questionService.findAll(req.user.id);
   }
 
   @Get(':id')

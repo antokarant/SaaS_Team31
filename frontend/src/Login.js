@@ -1,9 +1,12 @@
 import './App.css';
 import React from 'react';
 import {Route, Link, BrowserRouter, withRouter, Redirect} from 'react-router-dom';
+import axios from 'axios';
+import querystring from 'querystring';
 
 
-class Signup extends React.Component
+
+class Login extends React.Component
 {
 
     constructor(props)
@@ -15,6 +18,7 @@ class Signup extends React.Component
             givenName: undefined,
             givenPassword: undefined,
             error: false,
+            wrongAccount: false
         };
 
 
@@ -29,9 +33,32 @@ class Signup extends React.Component
         }
 
     }
-    handleSubmit = () =>
-    {
-        localStorage.setItem('token', "tokenForAgent47");
+    handleSubmit = (event) =>
+    { 
+        event.preventDefault()
+        let url = `http://localhost:5000/auth/login`;
+        axios.post(url,
+            querystring.stringify({
+                "username": this.state.givenName,
+                "password": this.state.givenPassword
+            }),
+            ).then(res => {
+                    console.log("we are here")
+                    let obj = res.data;
+                    JSON.stringify(obj)
+                    console.log(obj.access_token)
+                    this.setState({token: obj.access_token})
+                    console.log(this.state.token)
+                    document.cookie = obj.access_token;
+                    localStorage.setItem("token", obj.access_token)
+                    if(obj.access_token)
+                            this.setState({loggedIn: true,})
+                    this.props.action(this.state.givenName)
+
+        })
+        .catch(error => {
+            this.setState({token: null, loggedIn: false, wrongAccount: true})
+        });
         return ;
     }
     sendData = (event) => {
@@ -54,7 +81,8 @@ class Signup extends React.Component
         this.setState({ [name]: value });
     }
     render()
-    {
+    {   if(this.state.wrongAccount)
+            return <Redirect to = "/"/>
         if(!this.state.loggedIn) return (
             <div className = "App">
                 <div className = "main-window">
@@ -75,11 +103,10 @@ class Signup extends React.Component
                                         <td><input type = "text" name = "givenPassword" value={this.state.givenPassword} onChange={this.handleChange}/></td>
                                     </tr>
                                     <br />
-                                    <Link to = '/profile'>
-                                        <button className = "small-btn"  onClick = {this.sendData}>
+                                        <button className = "small-btn"  onClick = {this.handleSubmit}>
                                             <span className = "regular-text">Login</span>
                                         </button>
-                                    </Link>
+                                    
                                 </table>
                                 <br/>
                                 {this.state.error?"You need to give username and password":""}
@@ -96,4 +123,4 @@ class Signup extends React.Component
     }
 }
 
-export default Signup;
+export default Login;

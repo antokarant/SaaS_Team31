@@ -10,6 +10,7 @@ class AllQuestions extends React.Component
     constructor(props)
     {
         super(props);
+        console.log("which came first")
         this.state = {
             loggedIn: props.loggedIn,
             username: "Agent47",
@@ -25,6 +26,11 @@ class AllQuestions extends React.Component
 
     componentDidMount()
     {
+        console.log("we are here 2")
+        if(document.cookie){
+            console.log("i am logged in")
+            this.setState({loggedIn : true})
+        }
         this.fetchQuestions();
     }
 
@@ -39,8 +45,14 @@ class AllQuestions extends React.Component
 
     fetchQuestions()
     {
-        let url = `http://localhost:5000/question`;
-        axios.get(url)
+        console.log("we are here")
+        let url = `http://localhost:5000/answer`;
+        axios.get(url,
+            {
+                headers: {
+                "Authorization": `bearer ${localStorage.getItem("token")}`
+            }
+        })
         .then(response => {
             // handle success
             console.log("REQUEST SENT");
@@ -61,14 +73,14 @@ class AllQuestions extends React.Component
         console.log("inside display");
         return (
             <div>
-            {
-                this.state.sessionData.map(function(dict, index){
-                    return (
+                {
+                this.state.sessionData.map(answer => (
+    
                         // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div key = {JSON.stringify(dict["id"])}><span className = "link">{JSON.stringify(dict["title"])}</span> by <span className = "link">{JSON.stringify(dict["user"]["username"])}</span></div>
-                    );
-                })
-            }
+                        <div key = {answer.id} >{answer.id} {answer.positiveVotes} {answer.negativeVotes} {answer.text} {answer.user.id}</div>
+                  
+                    ))
+                }
             </div>
             // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
@@ -78,6 +90,7 @@ class AllQuestions extends React.Component
     {
         if(this.state.loggedIn) return (
             <div className="App">
+                {console.log(this.state.loggedIn)}
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>
@@ -85,7 +98,10 @@ class AllQuestions extends React.Component
             </div>
         );
         else return (
+            <div>
+            {console.log("byeee")}
             <Redirect to = "/"/>
+            </div>
         );
     }
 }

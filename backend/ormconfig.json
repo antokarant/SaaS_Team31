@@ -7,9 +7,6 @@
     "database": "nest",
     "entities": ["dist/**/*.entity.js"],
     "logging": true,
-    "synchronize": false,
-    "migrations": ["migration/*.js"],
-    "cli": {
-        "migrationsDir": "migration"
-    }
+    "synchronize": true
+    
 }

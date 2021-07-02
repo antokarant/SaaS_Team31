@@ -24,14 +24,29 @@ export class AnswerService {
             if(!user) throw new NotFoundException(`User ${userID} not found.`);
 
             const answer = await this.manager.create(Answer, createAnswerDto);
+            
+            //console.log(createAnswerDto)
             answer.question = question;
+            //let  newquestion = new Question();
+            //newquestion.id = 1;
+            //answer.question = newquestion;
             answer.user = user;
+            
             return this.manager.save(answer);
         });
     }
 
-    async findAll(): Promise<Answer[]> {
-        return this.manager.find(Answer, { relations: ["question"] });
+    async findAll(id) {
+        //return this.manager.find(Answer, { relations: ["question"] });
+        const result = await this.manager.createQueryBuilder('answer', 'answer')
+        .leftJoinAndSelect('answer.user', 'user')
+        .leftJoinAndSelect('answer.question', 'question')
+        .leftJoinAndSelect('answer.comments', 'comments')
+        .where('answer.userID = :id', {id})
+        .getMany()
+        console.log(result)
+        return result
+    
     }
 
     async findOne(id: number): Promise<Answer> {

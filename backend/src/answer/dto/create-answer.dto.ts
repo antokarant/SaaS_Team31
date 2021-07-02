@@ -6,7 +6,8 @@ export class CreateAnswerDto {
     @IsString()
     @IsNotEmpty()
     readonly text: string;
-    
-    readonly question: Question;
-    readonly user: User;
+
+    @IsNotEmpty()
+    readonly question : Question;
+    user: any;
 }

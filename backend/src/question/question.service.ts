@@ -35,19 +35,25 @@ export class QuestionService {
         });
     }
 
-    async findAll(): Promise<Question[]> {
-        return this.manager.find(Question, { relations: ["user", "keyword"] });
+    async findAll(id) {
+        const result = await this.manager.createQueryBuilder('question', 'question')
+        .leftJoinAndSelect('question.user', 'user')
+        .leftJoinAndSelect('question.answers', 'answers')
+        .where('question.userID = :id', {id})
+        .getMany()
+        //return this.manager.find(Question, { relations: ["user", "keyword"] });
+        return result;
     }
 
     async findOne(id: number): Promise<Question> {
-        const question = await this.manager.findOne(Question, id, { relations: ["user", "keyword"] });
+        const question = await this.manager.findOne(Question, id, { relations: ["user", "keywords"] });
         if(!question) throw new NotFoundException(`Question ${id} not found.`);
         return question;
     }
 
     async update(id: number, updateQuestionDto: UpdateQuestionDto): Promise<Question> {
         return this.manager.transaction(async manager => {
-            const question = await manager.findOne(Question, id, { relations: ["user", "keyword"] });
+            const question = await manager.findOne(Question, id, { relations: ["user", "keywords"] });
             if(!question) throw new NotFoundException(`Question ${id} not found.`);
             manager.merge(Question, question, updateQuestionDto);
             return manager.save(question);

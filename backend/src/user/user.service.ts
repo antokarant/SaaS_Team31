@@ -10,6 +10,8 @@ export class UserService {
     constructor(@InjectEntityManager() private manager: EntityManager) {}
 
     async create(createUserDto: CreateUserDto) : Promise<User> { // typescript requires specification of return type
+        const result = await this.manager.findOne(User, {"username": createUserDto.username}); 
+        if(result) throw new NotFoundException(`User ${createUserDto.username} already exists`);// so that no users with same username exist
         const user = await this.manager.create(User, createUserDto); // createUserDto is a subtype of user
         return this.manager.save(user); // returns a promise for the quiz as it was saved in the database
         // not returning user after saving because the promise includes the automatically generated id (by the orm)

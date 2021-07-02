@@ -5,7 +5,7 @@ import './App.css';
 function Layout(props)
 {
     let loggedIn = props.loggedIn;
-
+    let logout = props.logout
 
     return (
         <div>
@@ -25,7 +25,7 @@ function Layout(props)
             </div>
             {loggedIn ?
                 <Link to = "/">
-                    <button className="cool-btn" onClick={props.logout}>Log out </button>
+                    <button className="cool-btn" onClick={console.log("test")}>Log out </button>
                 </Link>
 
                 :

@@ -12,10 +12,10 @@ class AskQuestion extends React.Component
         super(props);
         this.state = {
             loggedIn: props.loggedIn,
-            username: "Agent47",
             questionTitle: null,
             questionText: null,
-            keywords: null
+            keywords: null,
+            loggedOut: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -41,12 +41,15 @@ class AskQuestion extends React.Component
             // connect with backend function - send request
             let url = `http://localhost:5000/question`;
 
-            axios.post(url, {
+            axios.post(url, 
+                {
                 title: this.state.questionTitle,
                 description: this.state.questionText,
-                user: {id: 1},
-                keyword: {name: this.state.keywords}
-            })
+                keywords: []
+            },{ headers: {
+                "Authorization": `bearer ${localStorage.getItem("token")}`
+            }
+            },)
             .then(res => {
                 let obj = res.data;
                 console.log(obj);
@@ -54,6 +57,8 @@ class AskQuestion extends React.Component
             })
             .catch(error => {
                 console.error(error);
+                //this.setState({loggedOut: true})
+                this.props.action()
             });
         }
         else
@@ -64,6 +69,8 @@ class AskQuestion extends React.Component
 
     render()
     {
+        if(this.state.loggedOut)
+            return <Redirect to = "/"/>
         if(this.state.loggedIn) return (
             <div className="App">
                 <div className = "main-window">

@@ -12,7 +12,7 @@ export class CreateQuestionDto {
     @IsNotEmpty()
     readonly description: string;
 
-    readonly user: User;
+    user: any;
     //@IsOptional()
     readonly keywords: Keyword[];
 }
