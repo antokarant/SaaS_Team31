@@ -49,7 +49,7 @@ class Question extends React.Component
     fetchQuestions()
     {
         console.log("we are here bla bla bla")
-        let url = `http://localhost:5000/question/${this.state.id}`;
+        let url = `http://localhost:5000/question/id/${this.state.id}`;
         axios.get(url,
             {
                 headers: {

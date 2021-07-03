@@ -98,7 +98,7 @@ class MyQuestionsAnswers extends React.Component
     fetchQuestions()
     {
         console.log("we are here")
-        let url = `http://localhost:5000/question`;
+        let url = `http://localhost:5000/question/user`;
         axios.get(url,
             {
                 headers: {

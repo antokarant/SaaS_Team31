@@ -16,12 +16,17 @@ export class QuestionController {
     console.log(createQuestionDto)
     return this.questionService.create(createQuestionDto);
   }
-  @Get()
-  findAll(@Request() req) {
-    return this.questionService.findAll(req.user.id);
+  @Get("user")
+  findAllUser(@Request() req) {
+    return this.questionService.findAllUser(req.user.id);
   }
 
-  @Get(':id')
+  @Get()
+  findAll() {
+    return this.questionService.findAll();
+  }
+
+  @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.questionService.findOne(+id);
   }

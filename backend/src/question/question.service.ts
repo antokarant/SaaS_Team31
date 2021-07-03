@@ -35,12 +35,18 @@ export class QuestionService {
         });
     }
 
-    async findAll(id) {
+    async findAllUser(id) {
         const result = await this.manager.createQueryBuilder('question', 'question')
         .leftJoinAndSelect('question.user', 'user')
         .leftJoinAndSelect('question.answers', 'answers')
         .where('question.userID = :id', {id})
         .getMany()
+        //return this.manager.find(Question, { relations: ["user", "keyword"] });
+        return result;
+    }
+
+    async findAll() {
+        const result = await this.manager.find(Question, {relations: ["user", "answers"]})
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         return result;
     }
