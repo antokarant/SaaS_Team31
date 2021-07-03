@@ -26,6 +26,11 @@ export class QuestionController {
     return this.questionService.findAll();
   }
 
+  @Get('latest')
+  findAllLatest() {
+    return this.questionService.findAllLatest();
+  }
+
   @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.questionService.findOne(+id);

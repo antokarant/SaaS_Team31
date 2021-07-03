@@ -7,6 +7,7 @@ import { Keyword } from '../keyword/entities/keyword.entity';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
 
+
 @Injectable()
 export class QuestionService {
     constructor(@InjectEntityManager() private manager: EntityManager) {}
@@ -48,6 +49,18 @@ export class QuestionService {
 
     async findAll() {
         const result = await this.manager.find(Question, {relations: ["user", "answers", "keywords"]})
+        //return this.manager.find(Question, { relations: ["user", "keyword"] });
+        return result;
+    }
+
+    async findAllLatest() {
+        const result = await this.manager.find(Question, {order: {createdOn: 'DESC'}, take: 15, relations: ["user", "answers", "keywords"]})
+        //return this.manager.find(Question, { relations: ["user", "keyword"] });
+        return result;
+
+        //const result = await this.manager.createQueryBuilder('question', 'question')
+        //.orderBy('question.createdOn', 'DESC')        
+        //.limit(15)
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         return result;
     }

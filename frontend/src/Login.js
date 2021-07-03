@@ -70,8 +70,8 @@ class Login extends React.Component
         this.setState({ [name]: value });
     }
     render()
-    {   if(this.state.wrongAccount)
-            return <Redirect to = "/"/>
+    {   //if(this.state.wrongAccount)
+        //    return <Redirect to = "/"/>
         if(!this.state.loggedIn) return (
             <div className = "App">
                 <div className = "main-window">
@@ -99,6 +99,8 @@ class Login extends React.Component
                                 </table>
                                 <br/>
                                 {this.state.error?"You need to give username and password":""}
+                                {this.state.wrongAccount?"Your username and/or password is incorrect":""}
+
                             </form>
                         </div>
                     </div>

@@ -1,11 +1,10 @@
 import './App.css';
-import WriteAnswer from './WriteAnswer';
 import AskQuestion from './AskQuestion';
 import Signup from './Signup';
 import Login from './Login';
 import Layout from './Layout';
 import Home from './Home';
-import AllQuestions from './AllQuestions';
+import AllQuestions from './LatestQuestions';
 import UserProfile from './UserProfile';
 import React from 'react';
 import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
@@ -32,17 +31,15 @@ class Profile extends React.Component {
                         My Profile page
                     </header>
                     <div className = "main-area">
-                        <Link to = "/myquestionsanswers">
-                            <div className = "big-box">my questions - my answers</div>
+                        <Link to = "/myquestions">
+                            <div className = "big-box">My questions</div>
                         </Link>
-                        <Link to = "/questions">
-                            <div className = "big-box">my contributions per day</div>
-                        </Link>
+                            <div className = "big-box">My contributions per day</div>
                         <Link to = "/askquestion">
                             <div className = "big-box"><span className = "regular-text">Ask a question</span></div>
                         </Link>
-                        <Link to = "/writeanswer">
-                            <div className = "big-box"><span className = "regular-text">Answer a question</span></div>
+                        <Link to = "/myanswers">
+                            <div className = "big-box"><span className = "regular-text">My answers</span></div>
                         </Link>
                     </div>
                 </div>
