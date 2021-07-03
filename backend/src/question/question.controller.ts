@@ -26,6 +26,11 @@ export class QuestionController {
     return this.questionService.findOne(+id);
   }
 
+  @Get('keyword/:word')
+  findKeyword(@Param('word') word: string) {
+    return this.questionService.findAllKeyword(word);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateQuestionDto: UpdateQuestionDto) {
     return this.questionService.update(+id, updateQuestionDto);

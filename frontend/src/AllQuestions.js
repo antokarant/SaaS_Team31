@@ -26,9 +26,7 @@ class AllQuestions extends React.Component
 
     componentDidMount()
     {
-        console.log("we are here 2")
-        if(document.cookie){
-            console.log("i am logged in")
+        if(localStorage.getItem("token")){
             this.setState({loggedIn : true})
         }
         this.fetchQuestions();
@@ -45,8 +43,7 @@ class AllQuestions extends React.Component
 
     fetchQuestions()
     {
-        console.log("we are here")
-        let url = `http://localhost:5000/answer`;
+        let url = `http://localhost:5000/question`;
         axios.get(url,
             {
                 headers: {
@@ -65,6 +62,7 @@ class AllQuestions extends React.Component
         .catch(error => {
             // handle error
             console.log(error);
+            this.props.logoutAction()
         });
     }
 
@@ -74,10 +72,10 @@ class AllQuestions extends React.Component
         return (
             <div>
                 {
-                this.state.sessionData.map(answer => (
+                this.state.sessionData.map(question => (
     
                         // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div key = {answer.id} >{answer.id} {answer.positiveVotes} {answer.negativeVotes} {answer.text} {answer.user.id}</div>
+                        <div key = {question.id} >{question.id} {question.description} {question.title} {question.user.id}</div>
                   
                     ))
                 }

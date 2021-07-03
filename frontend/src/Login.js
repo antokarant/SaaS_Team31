@@ -23,7 +23,6 @@ class Login extends React.Component
 
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.sendData = this.sendData.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
     }
@@ -53,23 +52,13 @@ class Login extends React.Component
                     localStorage.setItem("token", obj.access_token)
                     if(obj.access_token)
                             this.setState({loggedIn: true,})
-                    this.props.action(this.state.givenName)
+                    this.props.loginAction(this.state.givenName)
 
         })
         .catch(error => {
             this.setState({token: null, loggedIn: false, wrongAccount: true})
         });
         return ;
-    }
-    sendData = (event) => {
-        event.preventDefault()
-        if(!(this.state.givenName && this.state.givenPassword)){
-            this.setState({error: true})
-           // alert("message")
-        }
-        else {
-            this.props.action();
-        }
     }
     handleChange(event)
     {

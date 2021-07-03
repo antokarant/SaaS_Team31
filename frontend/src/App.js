@@ -14,6 +14,7 @@ import querystring from 'querystring';
 import Profile from './Profile';
 import MyQuestionsAnswers from './MyQuestionsAnswers';
 import Question from './Question';
+import QuestionsKeyword from './QuestionsKeyword';
 
 class App extends React.Component {
 
@@ -80,14 +81,11 @@ class App extends React.Component {
                 {console.log(document.cookie)}
                 <div className = "layout">
                     <div>
-                        <div className="header">
-                            <Link to = "/" className="closeButton">
-                            <button className="test">x</button>
-                            </Link>
-                        </div>
+                    <Link to = "/" >
                         <div className="main-title">
                             Q2A
                         </div>
+                    </Link>
                         <Link to="/">
                             <span className="regular-text">
                                 <button onClick={this.logoutCallbackFunction} className="cool-btn">Log out</button>
@@ -103,14 +101,15 @@ class App extends React.Component {
 
                 <Route exact path = "/" render={props => <Home  loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/signup"  render={props => <Signup  loggedIn={this.state.loggedIn}/>}/>
-                <Route exact path = "/login" render={props => <Login action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
-                <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn} action={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/login" render={props => <Login loginAction={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/writeanswer" render={props => <WriteAnswer  loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/myprofile" render={props => <Profile  />} />
-                <Route exact path = "/myquestionsanswers" render={props => <MyQuestionsAnswers  action={this.logoutCallbackFunction}/>} />
-                <Route path = "/question/:id" render={(props) => <Question {...props} action={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/myquestionsanswers" render={props => <MyQuestionsAnswers  logoutAction={this.logoutCallbackFunction}/>} />
+                <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword  logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
 
 
 
@@ -130,14 +129,11 @@ class App extends React.Component {
 
                 <div className = "layout">
                     <div>
-                        <div className="header">
-                            <Link to = "/" className="closeButton">
-                            <button className="test">x</button>
-                            </Link>
-                        </div>
+                    <Link to = "/" >
                         <div className="main-title">
                             Q2A
                         </div>
+                    </Link>
                         <Link to="/login">
                             <span className="regular-text">
                                 <button className="cool-btn">Log in</button>
@@ -154,11 +150,12 @@ class App extends React.Component {
 
                 <Route exact path = "/" render={props => <Home  loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/signup"  render={props => <Signup  loggedIn={this.state.loggedIn}/>}/>
-                <Route exact path = "/login" render={props => <Login action={this.loginCallbackFunction} loggedIn={this.state.loggedIn}/>} />
-                <Route exact path = "/askquestion" render={props => <Login  loggedIn={this.state.loggedIn}/>} />
-                <Route exact path = "/writeanswer" render={props => <Login  loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/login" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/askquestion" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/writeanswer" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
 
                 <div className="media">
                     <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
@@ -195,7 +192,11 @@ class App extends React.Component {
         return ;
     }
 
-
-
+/*<div className="header">
+                            <Link to = "/" className="closeButton">
+                            <button className="test">x</button>
+                            </Link>
+                        </div>
+auto einai gia to x pou den epaize kala*/
 }
 export default App;

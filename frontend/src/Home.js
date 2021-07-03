@@ -10,7 +10,6 @@ class Home extends React.Component
         super(props);
         this.state = {
             loggedIn: props.loggedIn,
-            username: "Agent47"
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +30,10 @@ class Home extends React.Component
                         Welcome to AMA
                     </header>
                     <div className = "main-area">
-                        <div className = "big-box">Questions per keyword</div>
+                        
+                        <Link to = "/questionsperkeyword">
+                            <div className = "big-box">Questions per keyword</div>
+                        </Link>
                         <Link to = "/questions">
                             <div className = "big-box">Questions per day</div>
                         </Link>

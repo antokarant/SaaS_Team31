@@ -72,7 +72,7 @@ class MyQuestionsAnswers extends React.Component
             // handle error
             console.log(error);
             this.setState({loggedOut: true})
-            this.props.action()
+            this.props.logoutAction()
 
         });
     }
@@ -118,7 +118,7 @@ class MyQuestionsAnswers extends React.Component
             // handle error
             console.log(error);
             //this.setState({loggedOut: true})
-            this.props.action()
+            this.props.logoutAction()
 
         });
     }

@@ -45,6 +45,15 @@ export class QuestionService {
         return result;
     }
 
+    async findAllKeyword(keyword) {
+        let finalResult = []
+        console.log(keyword)
+        const result = await this.manager.findOne(Keyword,keyword, {relations: ["questions"]})
+        return result.questions      
+        //return this.manager.find(Question, { relations: ["user", "keyword"] });
+        //return [];
+    }
+
     async findOne(id: number): Promise<Question> {
         const question = await this.manager.findOne(Question, id, { relations: ["user", "keywords"] });
         if(!question) throw new NotFoundException(`Question ${id} not found.`);

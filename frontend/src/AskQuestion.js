@@ -12,14 +12,26 @@ class AskQuestion extends React.Component
         super(props);
         this.state = {
             loggedIn: props.loggedIn,
-            questionTitle: null,
-            questionText: null,
-            keywords: null,
-            loggedOut: false
+            sessionData: null,
+            loggedOut: false,
+            questionAsked: false,
+            responseReceived:false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.keywordOptions = this.keywordOptions.bind(this);
+        this.fetchKeywords = this.fetchKeywords.bind(this);
+
+
+    }
+
+    componentDidMount()
+    {
+        if(localStorage.getItem("token")){
+            this.setState({loggedIn : true})
+        }
+        this.fetchKeywords();
     }
 
     handleChange(event)
@@ -54,11 +66,12 @@ class AskQuestion extends React.Component
                 let obj = res.data;
                 console.log(obj);
                 JSON.stringify(obj)
+                this.setState({questionAsked: true})
             })
             .catch(error => {
                 console.error(error);
                 //this.setState({loggedOut: true})
-                this.props.action()
+                this.props.logoutAction()
             });
         }
         else
@@ -66,9 +79,49 @@ class AskQuestion extends React.Component
             console.error("Information required");
         }
     }
+    fetchKeywords(){
+        let url = `http://localhost:5000/keyword`;
+        axios.get(url,
+            {
+                headers: {
+                "Authorization": `bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(response => {
+            // handle success
+            console.log(response);
+            let obj = response.data;
+            JSON.stringify(obj);
+            console.log(obj)
+            this.setState({sessionData: obj});
+            if(this.state.sessionData) this.setState({responseReceived : true});
+        })
+        .catch(error => {
+            // handle error
+            console.log(error);
+            this.props.logoutAction()
+        });
+    }
+    keywordOptions(){
+        console.log(this.state.sessionData)
+        console.log("hahahahah")
 
+        return ( 
+                this.state.sessionData.map(keyword => (
+    
+                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
+                        <option key={keyword.name}>{keyword.name}</option> 
+                    ))
+            // <div>{JSON.stringify(this.state.sessionData[0])}</div>
+        );
+
+
+    }
     render()
     {
+        
+        if(this.state.questionAsked)
+            return <Redirect to = "/myquestionsanswers"/>
         if(this.state.loggedOut)
             return <Redirect to = "/"/>
         if(this.state.loggedIn) return (
@@ -85,10 +138,23 @@ class AskQuestion extends React.Component
                             <label className = "regular-text">Description:</label>
                             <br />
                             <textarea name = "questionText" onChange = {this.handleChange}></textarea>
-                            <label className = "regular-text">Keywords:</label>
                             <br />
-                            <input type = "text" className = "text-field" name = "keywords" onChange = {this.handleChange}/>
+                            <label className = "regular-text">Keywords(choose up to 3 from existing keywords):</label>
+                            <br />
                         </form>
+                        <select className = "dropdown" name = "question">
+                              <option></option>
+                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        </select>
+                        <select className = "dropdown" name = "question">
+                              <option></option>
+                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        </select>
+                        <select className = "dropdown" name = "question">
+                              <option></option>
+                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        </select>
+
                     </div>
                 </div>
                 <div className = "footnote-wrapper">
