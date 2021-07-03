@@ -61,8 +61,6 @@ class MyQuestionsAnswers extends React.Component
         })
         .then(response => {
             // handle success
-            console.log("REQUEST SENT");
-            console.log(response);
             let obj = response.data;
             JSON.stringify(obj);
             this.setState({answersData: obj});
@@ -71,27 +69,26 @@ class MyQuestionsAnswers extends React.Component
         .catch(error => {
             // handle error
             console.log(error);
-            this.setState({loggedOut: true})
-            this.props.logoutAction()
-
+            // this.setState({loggedOut: true})
+            this.props.logoutAction();
         });
     }
 
     displayAnswers()
     {
-        console.log("inside display");
         return (
-            <div className = "showResult">
+            <div className = "qa-fetch-result">
                 {
                 this.state.answersData.map(answer => (
-    
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div key = {answer.id} >{answer.id} {answer.positiveVotes} {answer.negativeVotes} {answer.text} {answer.user.id}</div>
-                  
+                    <div className = "qa-block" key = {answer.id} >
+                        <Link to = {`/answer/${answer.id}`} >
+                            <div><span className = "qa-block-title">{answer.title}</span> <span className = "qa-block-details">{answer.user.username} {answer.createdOn}</span></div>
+                        </Link>
+                    </div>
+
                     ))
                 }
             </div>
-            // <div>{JSON.stringify(this.state.questionsData[0])}</div>
         );
     }
 
@@ -125,15 +122,17 @@ class MyQuestionsAnswers extends React.Component
 
     displayQuestions()
     {
-        console.log("inside display");
+        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
         return (
-            <div className = "showResult">
+            <div className = "qa-fetch-result">
                 {
                 this.state.questionsData.map(question => (
-    
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div key = {question.id} ><Link to = {`/question/${question.id}`} >{question.id}</Link> {question.createdOn} {question.updatedOn} {question.title} {question.description}</div>
-                  
+                    <div className = "qa-block" key = {question.id} >
+                        <Link to = {`/question/${question.id}`} className = "link-text">
+                            <div><div className = "qa-block-title">{question.title}</div> <div className = "qa-block-keywords">{question.keywords.map(keyword => (<div className = "keyword-box">{keyword.name}</div>))}</div> <div className = "qa-block-details">asked by {question.user.username} on {question.createdOn.slice(0, 10)}</div></div>
+                        </Link>
+                    </div>
+
                     ))
                 }
             </div>
@@ -142,22 +141,18 @@ class MyQuestionsAnswers extends React.Component
     }
 
     render()
-    {   if(this.state.loggedOut)
-            return <Redirect to= "/"/>
-        if(true) return (
+    {
+        if(this.state.loggedOut) return <Redirect to= "/"/>
+        return (
             <div className="App">
                 {console.log(this.state.loggedIn)}
                 <div className = "main-window">
-                    {this.state.answersReceived ? this.displayAnswers() : <div></div>}<br/><br/>
+                    <div className = "label-block"><span className = "regular-text">Questions submitted by you</span></div>
                     {this.state.questionsReceived ? this.displayQuestions() : <div></div>}
+
+                    <div className = "label-block"><span className = "regular-text">Questions answered by you</span></div>
+                    {this.state.answersReceived ? this.displayAnswers() : <div></div>}
                 </div>
-                <Link to = "/">button</Link>
-            </div>
-        );
-        else return (
-            <div>
-            {console.log("byeee")}
-            <Redirect to = "/"/>
             </div>
         );
     }

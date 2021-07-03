@@ -76,21 +76,22 @@ console.log("constructor here")
 
     displayQuestions()
     {
-        console.log("we are displayinng")
         return (
-            <div>
+            <div className = "qa-fetch-result">
                 {
                 this.state.questionData.map(question => (
-    
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div key = {question.id} >{question.id} {question.description} {question.title} </div>
-                  
+                    <div className = "qa-block" key = {question.id} >
+                        <Link to = {`/question/${question.id}`} className = "link-text">
+                            <div><div className = "qa-block-title">{question.title}</div> </div>
+                        </Link>
+                    </div>
+
                     ))
                 }
             </div>
-            // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
     }
+
     fetchKeywords(){
         let url = `http://localhost:5000/keyword`;
         axios.get(url,
@@ -115,11 +116,11 @@ console.log("constructor here")
     }
     keywordOptions(){
         let result = this.state.keywordData
-        return ( 
+        return (
                 result.map(keyword => (
-    
+
                         // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <option key={keyword.name}>{keyword.name}</option> 
+                        <option key={keyword.name}>{keyword.name}</option>
                     ))
             // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
@@ -143,7 +144,7 @@ console.log("constructor here")
                     <button className="small-btn footnote" onClick = {this.fetchQuestions}>
                           <span className = "regular-text" >Search</span>
                     </button>
-                    
+
                 </div>
 
                 <Link to = "/">Homepage</Link>

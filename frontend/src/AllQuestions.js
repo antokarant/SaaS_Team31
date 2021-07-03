@@ -68,19 +68,19 @@ class AllQuestions extends React.Component
 
     displayQuestions()
     {
-        console.log("inside display");
         return (
-            <div>
+            <div className = "qa-fetch-result">
                 {
                 this.state.sessionData.map(question => (
-    
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div key = {question.id} >{question.id} {question.description} {question.title} {question.user.id}</div>
-                  
+                    <div className = "qa-block" key = {question.id} >
+                        <Link to = {`/question/${question.id}`} className = "link-text">
+                            <div><div className = "qa-block-title">{question.title}</div> <div className = "qa-block-keywords">{question.keywords.map(keyword => (<div className = "keyword-box">{keyword.name}</div>))}</div> <div className = "qa-block-details">asked by {question.user.username} on {question.createdOn.slice(0, 10)}</div></div>
+                        </Link>
+                    </div>
+
                     ))
                 }
             </div>
-            // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
     }
 
@@ -92,7 +92,6 @@ class AllQuestions extends React.Component
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>
-                <Link to = "/">button</Link>
             </div>
         );
         else return (

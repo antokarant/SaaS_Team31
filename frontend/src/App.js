@@ -24,7 +24,7 @@ class App extends React.Component {
         this.state = {
             loggedIn: false,
             username: null
-            
+
         };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,14 +67,14 @@ class App extends React.Component {
     logoutCallbackFunction = () => {
         //console.log(document.cookie)
         var mydate = new Date();
-        localStorage.removeItem("token") 
+        localStorage.removeItem("token")
         this.setState({loggedIn: false})
     }
     /*<button onClick={()=>console.log(this.state.loggedIn)}></button>
     <button onClick={()=>console.log(localStorage.getItem('token'))}></button> gia elegxo mesa sto render*/
     render(){
         console.log("mytimenow" +this.state.loggedIn)
-    
+
         if(this.state.loggedIn){
             return (
             <div className = "Background">
@@ -105,11 +105,11 @@ class App extends React.Component {
                 <Route exact path = "/askquestion" render={props => <AskQuestion  loggedIn={this.state.loggedIn} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/writeanswer" render={props => <WriteAnswer  loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
-                <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/questions" render={props => <AllQuestions logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/myprofile" render={props => <Profile  />} />
                 <Route exact path = "/myquestionsanswers" render={props => <MyQuestionsAnswers  logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
-                <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword  logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
 
 
 
@@ -154,7 +154,7 @@ class App extends React.Component {
                 <Route exact path = "/askquestion" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/writeanswer" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
-                <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
 
                 <div className="media">

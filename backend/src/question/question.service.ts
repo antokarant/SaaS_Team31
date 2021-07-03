@@ -39,6 +39,7 @@ export class QuestionService {
         const result = await this.manager.createQueryBuilder('question', 'question')
         .leftJoinAndSelect('question.user', 'user')
         .leftJoinAndSelect('question.answers', 'answers')
+        .leftJoinAndSelect('question.keywords', 'keywords')
         .where('question.userID = :id', {id})
         .getMany()
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
@@ -46,7 +47,7 @@ export class QuestionService {
     }
 
     async findAll() {
-        const result = await this.manager.find(Question, {relations: ["user", "answers"]})
+        const result = await this.manager.find(Question, {relations: ["user", "answers", "keywords"]})
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         return result;
     }
@@ -55,7 +56,7 @@ export class QuestionService {
         let finalResult = []
         console.log(keyword)
         const result = await this.manager.findOne(Keyword,keyword, {relations: ["questions"]})
-        return result.questions      
+        return result.questions
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         //return [];
     }
