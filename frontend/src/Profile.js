@@ -18,9 +18,9 @@ class Profile extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state = {  
+        this.state = {
         };
-    } 
+    }
     /*<button onClick={()=>console.log(this.state.loggedIn)}></button>
     <button onClick={()=>console.log(localStorage.getItem('token'))}></button> gia elegxo mesa sto render*/
     render()
@@ -35,7 +35,7 @@ class Profile extends React.Component {
                         <Link to = "/myquestionsanswers">
                             <div className = "big-box">my questions - my answers</div>
                         </Link>
-                        <Link to = "/questions">
+                        <Link to = "/stats">
                             <div className = "big-box">my contributions per day</div>
                         </Link>
                         <Link to = "/askquestion">
@@ -53,4 +53,3 @@ class Profile extends React.Component {
     }
 }
 export default Profile;
-

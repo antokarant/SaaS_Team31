@@ -7,6 +7,7 @@ import Layout from './Layout';
 import Home from './Home';
 import AllQuestions from './AllQuestions';
 import UserProfile from './UserProfile';
+import UserStatistics from './UserStatistics';
 import React from 'react';
 import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
@@ -110,8 +111,7 @@ class App extends React.Component {
                 <Route exact path = "/myquestionsanswers" render={props => <MyQuestionsAnswers  logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
-
-
+                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
 
                 <div className="media">
                     <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
@@ -156,6 +156,7 @@ class App extends React.Component {
                 <Route exact path = "/profile" render={props => <UserProfile loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/questions" render={props => <AllQuestions loggedIn={this.state.loggedIn} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
 
                 <div className="media">
                     <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
