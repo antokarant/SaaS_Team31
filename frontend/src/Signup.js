@@ -14,7 +14,6 @@ class Signup extends React.Component
         super(props);
         this.state = {
             loggedIn: props.loggedIn,
-            username: "Agent47",
             givenName: undefined,
             givenPassword: undefined,
             givenPassword2: undefined,
@@ -86,12 +85,12 @@ class Signup extends React.Component
                                     <br />
                                     <tr>
                                         <td><label className = "regular-text">Password:</label></td>
-                                        <td><input type = "text" name = "givenPassword" value={this.state.givenPassword} onChange={this.handleChange} /></td>
+                                        <td><input type = "password" name = "givenPassword" value={this.state.givenPassword} onChange={this.handleChange} /></td>
                                     </tr>
                                     <br />
                                     <tr>
                                         <td><label className = "regular-text">Re-enter password:</label></td>
-                                        <td><input type = "text" name = "givenPassword2" value={this.state.givenPassword2} onChange={this.handleChange} /></td>
+                                        <td><input type = "password" name = "givenPassword2" value={this.state.givenPassword2} onChange={this.handleChange} /></td>
                                     </tr>
                                     <br />
                                     <tr>{this.state.error?"You need to give username and password and passwords must match":""}</tr>
@@ -101,7 +100,7 @@ class Signup extends React.Component
                             </form>  
                         </div>
                     </div>
-
+                    (After successfully signing up you need to login to your account)
                 </div>
 
                 <div className = "footnote-wrapper">

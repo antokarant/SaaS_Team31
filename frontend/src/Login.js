@@ -14,7 +14,6 @@ class Login extends React.Component
         super(props);
         this.state = {
             loggedIn: props.loggedIn,
-            username: "Agent47",
             givenName: undefined,
             givenPassword: undefined,
             error: false,
@@ -89,7 +88,7 @@ class Login extends React.Component
                                     <br />
                                     <tr>
                                         <td><label className = "regular-text">Password:</label></td>
-                                        <td><input type = "text" name = "givenPassword" value={this.state.givenPassword} onChange={this.handleChange}/></td>
+                                        <td><input type = "password" name = "givenPassword" value={this.state.givenPassword} onChange={this.handleChange}/></td>
                                     </tr>
                                     <br />
                                         <button className = "small-btn"  onClick = {this.handleSubmit}>

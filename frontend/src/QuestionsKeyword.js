@@ -120,10 +120,10 @@ class QuestionsKeyword extends React.Component
                             <option></option>
                             {this.state.keywordsReceived ? this.keywordOptions() : <div></div>}
                         </select>
-
+                        {this.state.keyword ? 
                         <button className="small-btn" onClick = {this.fetchQuestions}>
                               <span className = "regular-text" >Search</span>
-                        </button>
+                        </button> : <div></div>}
                         <div>
                             {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                         </div>
