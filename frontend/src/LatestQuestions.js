@@ -9,7 +9,6 @@ class LatestQuestions extends React.Component
     constructor(props)
     {
         super(props);
-        console.log("which came first")
         this.state = {
             questions: null,
             responseReceived: false,
@@ -78,7 +77,6 @@ class LatestQuestions extends React.Component
     {
         return (
             <div className="App">
-                {console.log(this.state.loggedIn)}
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>

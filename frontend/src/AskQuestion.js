@@ -66,7 +66,6 @@ class AskQuestion extends React.Component
             },)
             .then(res => {
                 let obj = res.data;
-                console.log(obj);
                 JSON.stringify(obj)
                 this.setState({questionAsked: true})
             })
@@ -91,7 +90,6 @@ class AskQuestion extends React.Component
         .then(response => {
             let obj = response.data;
             JSON.stringify(obj);
-            console.log(obj)
             this.setState({sessionData: obj});
             if(this.state.sessionData) this.setState({responseReceived : true});
         })
@@ -114,7 +112,7 @@ class AskQuestion extends React.Component
     {
         
         if(this.state.questionAsked)
-            return <Redirect to = "/myquestionsanswers"/>
+            return <Redirect to = "/myquestions"/>
 
         return (
             <div className="App">

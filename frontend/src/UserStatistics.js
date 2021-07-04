@@ -1,6 +1,5 @@
 import './App.css';
 import axios from 'axios';
-import WriteAnswer from './WriteAnswer';
 import React, {UseState} from 'react';
 import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 import { Pie, Bar } from 'react-chartjs-2';
@@ -122,9 +121,7 @@ class UserStatistics extends React.Component
             }
         })
         .catch(error => {
-            // handle error
             console.log(error);
-            //this.setState({loggedOut: true})
             this.props.logoutAction()
 
         });
@@ -150,7 +147,7 @@ class UserStatistics extends React.Component
         for(const e of Object.entries(dataFromBackend))
         {
             let creationDate = e[1].createdOn.slice(0, 7);
-            if(this.state.latestMonths.includes(creationDate)) console.log("why motherfucker");
+            if(this.state.latestMonths.includes(creationDate))
                 ans[creationDate] += 1;
         }
 

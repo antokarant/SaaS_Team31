@@ -1,53 +1,52 @@
 import './App.css';
+import AskQuestion from './AskQuestion';
+import Signup from './Signup';
+import Login from './Login';
+import Home from './Home';
+import AllQuestions from './LatestQuestions';
 import React from 'react';
-import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
+import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
+import axios from 'axios';
+import querystring from 'querystring';
 
-class UserProfile extends React.Component
-{
+
+class UserProfile extends React.Component {
 
     constructor(props)
     {
         super(props);
         this.state = {
-            loggedIn: props.loggedIn,
-            username: "Agent47"
         };
-
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    handleSubmit()
-    {
-        this.setState({loggedIn : true});
-        return ;
-    }
-
+    /*<button onClick={()=>console.log(this.state.loggedIn)}></button>
+    <button onClick={()=>console.log(localStorage.getItem('token'))}></button> gia elegxo mesa sto render*/
     render()
     {
-        if(this.state.loggedIn) return (
+        return (
             <div className = "App">
                 <div className = "main-window">
                     <header className="mainheader">
-                        MY PROFILE PAGE
+                        My Profile page
                     </header>
                     <div className = "main-area">
-                        <div className = "big-box">My questions</div>
-                        <div className = "big-box">My answers</div>
+                        <Link to = "/stats">
+                            <div className = "big-box">My contributions per day</div>
+                        </Link>
+                        <Link to = "/myquestions">
+                            <div className = "big-box">My questions</div>
+                        </Link>
                         <Link to = "/askquestion">
                             <div className = "big-box"><span className = "regular-text">Ask a question</span></div>
                         </Link>
-                        <Link to = "/writeanswer">
-                            <div className = "big-box"><span className = "regular-text">Answer a question</span></div>
+                        <Link to = "/myanswers">
+                            <div className = "big-box"><span className = "regular-text">My answers</span></div>
                         </Link>
                     </div>
                 </div>
+
             </div>
 
         );
-        else return (
-            <Redirect to = "/"/>
-        );
     }
 }
-
 export default UserProfile;

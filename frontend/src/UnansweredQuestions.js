@@ -77,7 +77,6 @@ class UnansweredQuestions extends React.Component
     {
         return (
             <div className="App">
-                {console.log(this.state.loggedIn)}
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>

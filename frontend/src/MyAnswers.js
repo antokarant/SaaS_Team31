@@ -57,7 +57,6 @@ class MyAnswers extends React.Component
 
     displayAnswers()
     {
-        console.log(this.state.answersData);
         return (
             <div className = "qa-fetch-result">
                 {

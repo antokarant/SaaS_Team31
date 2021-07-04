@@ -93,7 +93,6 @@ class Question extends React.Component
             },)
             .then(res => {
                 let obj = res.data;
-                console.log(obj);
                 JSON.stringify(obj)
             })
             .catch(error => {
@@ -113,7 +112,6 @@ class Question extends React.Component
 
         return (
             <div className="App">
-                {console.log(this.state.loggedIn)}
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestion() : <div></div>}
                 </div>

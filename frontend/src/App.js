@@ -3,17 +3,15 @@ import MyAnswers from './MyAnswers';
 import AskQuestion from './AskQuestion';
 import Signup from './Signup';
 import Login from './Login';
-import Layout from './Layout';
 import Home from './Home';
 import LatestQuestions from './LatestQuestions';
 import UnansweredQuestions from './UnansweredQuestions';
-import UserProfile from './UserProfile';
 import UserStatistics from './UserStatistics';
 import React from 'react';
 import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
 import querystring from 'querystring';
-import Profile from './Profile';
+import UserProfile from './UserProfile';
 import MyQuestions from './MyQuestions';
 import Question from './Question';
 import QuestionsKeyword from './QuestionsKeyword';
@@ -30,7 +28,6 @@ class App extends React.Component {
         };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.myChangeHandler = this.myChangeHandler.bind(this);
         this.loginCallbackFunction = this.loginCallbackFunction.bind(this);
         this.logoutCallbackFunction = this.logoutCallbackFunction.bind(this);
         this.LoginProcess = this.LoginProcess.bind(this);
@@ -39,12 +36,10 @@ class App extends React.Component {
     componentDidMount() {
         let token = localStorage.getItem("token")
         if (token === null || !token) {
-            console.log("hello there")
 
             this.setState({loggedIn: false})
         }
         else{
-            console.log("option2")
             let username = localStorage.getItem('username')
             this.setState({loggedIn: true, username: username})
         }
@@ -55,9 +50,6 @@ class App extends React.Component {
         else
         this.setState({loggedIn: false,});
     }
-    myChangeHandler(){
-        console.log("test test")
-    }
     loginCallbackFunction = (username) => {
         this.setState({loggedIn: true})
         this.setState({"username": username})
@@ -65,7 +57,6 @@ class App extends React.Component {
 
     }
     logoutCallbackFunction = () => {
-        //console.log(document.cookie)
         var mydate = new Date();
         localStorage.removeItem("token")
         this.setState({loggedIn: false})
@@ -73,12 +64,10 @@ class App extends React.Component {
     /*<button onClick={()=>console.log(this.state.loggedIn)}></button>
     <button onClick={()=>console.log(localStorage.getItem('token'))}></button> gia elegxo mesa sto render*/
     render(){
-        console.log("mytimenow" +this.state.loggedIn)
 
         if(this.state.loggedIn){
             return (
             <div className = "Background">
-                {console.log(document.cookie)}
                 <div className = "layout">
                     <div>
                     <Link to = "/" >
@@ -91,7 +80,7 @@ class App extends React.Component {
                                 <button onClick={this.logoutCallbackFunction} className="cool-btn">Log out</button>
                             </span>
                         </Link>
-                        <Link to = "/myprofile">
+                        <Link to = "/profile">
                             <button className = "cool-btn">
                                 {this.state.username}
                             </button>
@@ -104,13 +93,12 @@ class App extends React.Component {
                 <Route exact path = "/login" render={props => <Login loginAction={this.loginCallbackFunction} />} />
                 <Route exact path = "/askquestion" render={props => <AskQuestion logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/myanswers" render={props => <MyAnswers logoutAction={this.logoutCallbackFunction}/>} />
-                <Route exact path = "/profile" render={props => <UserProfile />} />
                 <Route exact path = "/latestquestions" render={props => <LatestQuestions logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/unanswered" render={props => <UnansweredQuestions logoutAction={this.logoutCallbackFunction}/>} />
-                <Route exact path = "/myprofile" render={props => <Profile  />} />
+                <Route exact path = "/profile" render={props => <UserProfile  />} />
                 <Route exact path = "/myquestions" render={props => <MyQuestions  logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
-                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
+                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword logoutAction={this.logoutCallbackFunction}/>} />
 
 
@@ -126,8 +114,6 @@ class App extends React.Component {
         }
         else return(
             <div className = "Background">
-                {console.log(document.cookie)}
-
                 <div className = "layout">
                     <div>
                     <Link to = "/" >
@@ -157,9 +143,9 @@ class App extends React.Component {
                 <Route exact path = "/myquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/profile" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/latestquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
-                <Route exact path = "/unanswered" render={props => <UnansweredQuestions logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/unanswered" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
-                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/stats" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Login logoutAction={this.logoutCallbackFunction} loginAction={this.loginCallbackFunction}/>} />
 
 
@@ -181,12 +167,9 @@ class App extends React.Component {
                 "password": this.state.givenPassword
             }),
             ).then(res => {
-                    console.log("we are here")
                     let obj = res.data;
                     JSON.stringify(obj)
-                    console.log(obj.access_token)
                     this.setState({token: obj.access_token})
-                    console.log(this.state.token)
                     document.cookie = obj.access_token;
                     if(obj.access_token)
                             this.setState({loggedIn: true,})

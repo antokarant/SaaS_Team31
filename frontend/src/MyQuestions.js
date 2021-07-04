@@ -82,7 +82,6 @@ class MyQuestions extends React.Component
     {
         return (
             <div className="App">
-                {console.log(this.state.loggedIn)}
                 <div className = "main-window">
                     <div className = "label-block"><span className = "regular-text">Questions submitted by you</span></div>
                     {this.state.questionsReceived ? this.displayQuestions() : <div></div>}
