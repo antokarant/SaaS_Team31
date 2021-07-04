@@ -57,13 +57,14 @@ class MyAnswers extends React.Component
 
     displayAnswers()
     {
+        console.log(this.state.answersData);
         return (
             <div className = "qa-fetch-result">
                 {
                 this.state.answersData.map(answer => (
                     <div className = "qa-block" key = {answer.id} >
-                        <Link to = {`/answer/${answer.id}`} >
-                            <div><span className = "qa-block-title">{answer.title}</span> <span className = "qa-block-details">{answer.user.username} {answer.createdOn}</span></div>
+                        <Link to = {`/question/${answer.question.id}`} className = "link-text">
+                            <div><div className = "qa-block-title">{answer.question.title}</div> <div className = "qa-block-details">answered on {answer.createdOn.slice(0, 10)}</div></div>
                         </Link>
                     </div>
 
@@ -73,7 +74,7 @@ class MyAnswers extends React.Component
         );
     }
 
-    
+
     render()
     {
         return (
