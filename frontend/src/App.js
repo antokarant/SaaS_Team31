@@ -8,6 +8,7 @@ import Home from './Home';
 import LatestQuestions from './LatestQuestions';
 import UnansweredQuestions from './UnansweredQuestions';
 import UserProfile from './UserProfile';
+import UserStatistics from './UserStatistics';
 import React from 'react';
 import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
@@ -109,8 +110,8 @@ class App extends React.Component {
                 <Route exact path = "/myprofile" render={props => <Profile  />} />
                 <Route exact path = "/myquestions" render={props => <MyQuestions  logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction} loggedIn={this.state.loggedIn}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword logoutAction={this.logoutCallbackFunction}/>} />
-
 
 
                 <div className="media">
@@ -158,7 +159,9 @@ class App extends React.Component {
                 <Route exact path = "/latestquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/unanswered" render={props => <UnansweredQuestions logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/stats" render={props => <UserStatistics logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Login logoutAction={this.logoutCallbackFunction} loginAction={this.loginCallbackFunction}/>} />
+
 
                 <div className="media">
                     <a className="myLink" href="https://github.com/antokarant/SaaS_team31">github</a>
