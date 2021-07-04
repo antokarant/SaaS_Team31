@@ -18,10 +18,10 @@ export class Answer {
     text: string;
 
     @Column({ default: 0 })
-    positiveVotes: number;
+    upvotes: number;
 
     @Column({ default: 0 })
-    negativeVotes: number;
+    downvotes: number;
 
     @ManyToOne( () => Question, question => question.answers, { nullable: true, onDelete: "CASCADE" }) // delete all answers if the question is deleted
     @JoinColumn({name : 'questionID'})

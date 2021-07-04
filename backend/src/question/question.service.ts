@@ -59,9 +59,20 @@ export class QuestionService {
         return result;
 
         //const result = await this.manager.createQueryBuilder('question', 'question')
-        //.orderBy('question.createdOn', 'DESC')        
+        //.orderBy('question.createdOn', 'DESC')
         //.limit(15)
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
+        return result;
+    }
+
+    async findUnanswered() {
+        const result = await this.manager.find(Question, {
+            relations: ["user", "answers", "keywords"],
+            where: {
+                answerCount: 0
+            }
+        });
+
         return result;
     }
 

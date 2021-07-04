@@ -6,6 +6,7 @@ import Login from './Login';
 import Layout from './Layout';
 import Home from './Home';
 import LatestQuestions from './LatestQuestions';
+import UnansweredQuestions from './UnansweredQuestions';
 import UserProfile from './UserProfile';
 import React from 'react';
 import {Route, Link, BrowserRouter, useHistory, withRouter} from 'react-router-dom';
@@ -104,6 +105,7 @@ class App extends React.Component {
                 <Route exact path = "/myanswers" render={props => <MyAnswers logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/profile" render={props => <UserProfile />} />
                 <Route exact path = "/latestquestions" render={props => <LatestQuestions logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/unanswered" render={props => <UnansweredQuestions logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/myprofile" render={props => <Profile  />} />
                 <Route exact path = "/myquestions" render={props => <MyQuestions  logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
@@ -154,6 +156,7 @@ class App extends React.Component {
                 <Route exact path = "/myquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/profile" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/latestquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
+                <Route exact path = "/unanswered" render={props => <UnansweredQuestions logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
                 <Route path = "/question/:id" render={(props) => <Login logoutAction={this.logoutCallbackFunction} loginAction={this.loginCallbackFunction}/>} />
 

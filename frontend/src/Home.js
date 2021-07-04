@@ -30,19 +30,19 @@ class Home extends React.Component
                         Welcome to AMA
                     </header>
                     <div className = "main-area">
-                        
+
                         <Link to = "/questionsperkeyword">
                             <div className = "big-box">Questions per keyword</div>
                         </Link>
                         <Link to = "/latestquestions">
-                            <div className = "big-box">Latest Questions</div>
+                            <div className = "big-box">Latest questions</div>
                         </Link>
                         <Link to = "/askquestion">
                             <div className = "big-box"><span className = "regular-text">Ask a question</span></div>
                         </Link>
-                        
-                            <div className = "big-box"><span className = "regular-text">To be filled</span></div>
-
+                        <Link to = "/unanswered">
+                            <div className = "big-box"><span className = "regular-text">Unanswered questions</span></div>
+                        </Link>
                     </div>
                 </div>
 
