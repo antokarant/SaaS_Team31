@@ -78,7 +78,8 @@ class QuestionsKeyword extends React.Component
         );
     }
 
-    fetchKeywords(){
+    fetchKeywords()
+    {
         let url = `http://localhost:5000/keyword`;
         axios.get(url,
             {
@@ -97,13 +98,15 @@ class QuestionsKeyword extends React.Component
             this.props.logoutAction()
         });
     }
-    keywordOptions(){
+
+    keywordOptions()
+    {
         let result = this.state.keywordData
         return (
-                result.map(keyword => (
-                        <option key={keyword.name}>{keyword.name}</option>
-                    ))
-        );        
+            result.map(keyword => (
+                    <option key={keyword.name}>{keyword.name}</option>
+                ))
+        );
     }
 
     render()
@@ -111,18 +114,20 @@ class QuestionsKeyword extends React.Component
         return (
             <div className="App">
                 <div className = "main-window">
-                    {this.state.responseReceived ? this.displayQuestions() : <div></div>}
-                </div>
-                <div>
-                    <select name = "keyword" value={this.state.keyword} onChange = {this.handleChange} className = "dropdown">
-                              <option></option>
-                              {this.state.keywordsReceived ? this.keywordOptions() : <div></div>}
-                    </select>
-                    <br />
-                    <button className="small-btn footnote" onClick = {this.fetchQuestions}>
-                          <span className = "regular-text" >Search</span>
-                    </button>
+                    <header>See all questions with selected keyword</header>
+                    <div className = "main-area">
+                        <select name = "keyword" value={this.state.keyword} onChange = {this.handleChange} className = "dropdown">
+                            <option></option>
+                            {this.state.keywordsReceived ? this.keywordOptions() : <div></div>}
+                        </select>
 
+                        <button className="small-btn" onClick = {this.fetchQuestions}>
+                              <span className = "regular-text" >Search</span>
+                        </button>
+                        <div>
+                            {this.state.responseReceived ? this.displayQuestions() : <div></div>}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

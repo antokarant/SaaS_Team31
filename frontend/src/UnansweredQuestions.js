@@ -78,6 +78,7 @@ class UnansweredQuestions extends React.Component
         return (
             <div className="App">
                 <div className = "main-window">
+                    <header>Unanswered questions</header>
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>
             </div>

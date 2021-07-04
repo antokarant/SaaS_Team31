@@ -78,6 +78,7 @@ class LatestQuestions extends React.Component
         return (
             <div className="App">
                 <div className = "main-window">
+                    <header>Most recent questions</header>
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
                 </div>
             </div>

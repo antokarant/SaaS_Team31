@@ -162,9 +162,11 @@ class UserStatistics extends React.Component
 
         return (
             <div>
-                <div>Total questions asked {this.state.questionCount}</div>
-                <div>Total answers submitted {this.state.answerCount}</div>
-                <div>User score {this.state.voteCount}</div>
+                <div className = "main-area">
+                    <div>Total questions asked {this.state.questionCount}</div>
+                    <div>Total answers submitted {this.state.answerCount}</div>
+                    <div>User score {this.state.voteCount}</div>
+                </div>
                 <div>Activity over time</div>
                 <div className = "chart-container">
                     <Pie
