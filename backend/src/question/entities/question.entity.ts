@@ -26,6 +26,9 @@ export class Question {
     @Column({ default: 0 })
     downvotes: number;
 
+    @Column({ default: 0 })
+    answerCount: number;
+
     @OneToMany(type => Answer, answer => answer.question) // answer.question is foreign key
     answers: Answer[];
 

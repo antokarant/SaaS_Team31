@@ -1,6 +1,5 @@
 import './App.css';
 import axios from 'axios';
-import WriteAnswer from './WriteAnswer';
 import React from 'react';
 import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
@@ -10,9 +9,7 @@ class QuestionsKeyword extends React.Component
     constructor(props)
     {
         super(props);
-        console.log("which came first")
         this.state = {
-            loggedIn: props.loggedIn,
             questions: null,
             responseReceived: false,
             keywordsReceived: false,
@@ -21,7 +18,6 @@ class QuestionsKeyword extends React.Component
             keyword: null
         };
 
-console.log("constructor here")
         this.handleChange = this.handleChange.bind(this);
         this.fetchQuestions = this.fetchQuestions.bind(this);
         this.displayQuestions = this.displayQuestions.bind(this);
@@ -32,13 +28,6 @@ console.log("constructor here")
 
     }
 
-    componentDidMount()
-    {
-        if(localStorage.getItem("token")){
-            this.setState({loggedIn : true})
-        }
-
-    }
 
     handleChange(event)
     {
@@ -60,15 +49,12 @@ console.log("constructor here")
             }
         })
         .then(response => {
-            // handle success
-            console.log("REQUEST SENT");
             let obj = response.data;
             JSON.stringify(obj);
             this.setState({questionData: obj});
             if(this.state.questionData) this.setState({responseReceived : true});
         })
         .catch(error => {
-            // handle error
             console.log(error);
             this.props.logoutAction()
         });
@@ -101,15 +87,12 @@ console.log("constructor here")
             }
         })
         .then(response => {
-            // handle success
             let obj = response.data;
             JSON.stringify(obj);
-            console.log(obj)
             this.setState({keywordData: obj});
             if(this.state.keywordData) this.setState({keywordsReceived : true});
         })
         .catch(error => {
-            // handle error
             console.log(error);
             this.props.logoutAction()
         });
@@ -118,11 +101,8 @@ console.log("constructor here")
         let result = this.state.keywordData
         return (
                 result.map(keyword => (
-
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
                         <option key={keyword.name}>{keyword.name}</option>
                     ))
-            // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
 
 
@@ -130,7 +110,7 @@ console.log("constructor here")
 
     render()
     {
-        if(this.state.loggedIn) return (
+        return (
             <div className="App">
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestions() : <div></div>}
@@ -150,14 +130,8 @@ console.log("constructor here")
                 <Link to = "/">Homepage</Link>
             </div>
         );
-        else return (
-            <div>
-            <Redirect to = "/"/>
-            </div>
-        );
     }
-    //<textarea  name = "keyword" value={this.state.keyword} onChange={this.handleChange}></textarea>
-    //gia eisodo keyword ws text
 }
+
 
 export default QuestionsKeyword;

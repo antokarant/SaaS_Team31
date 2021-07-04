@@ -26,6 +26,16 @@ export class QuestionController {
     return this.questionService.findAll();
   }
 
+  @Get('latest')
+  findAllLatest() {
+    return this.questionService.findAllLatest();
+  }
+
+  @Get('unanswered')
+  findUnanswered() {
+    return this.questionService.findUnanswered();
+  }
+
   @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.questionService.findOne(+id);

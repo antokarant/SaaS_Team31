@@ -1,6 +1,5 @@
 import './App.css';
 import axios from 'axios';
-import WriteAnswer from './WriteAnswer';
 import React from 'react';
 import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
@@ -11,11 +10,12 @@ class AskQuestion extends React.Component
     {
         super(props);
         this.state = {
-            loggedIn: props.loggedIn,
             sessionData: null,
-            loggedOut: false,
             questionAsked: false,
             responseReceived:false,
+            keyword1: null,
+            keyword2: null,
+            keyword3: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -28,9 +28,6 @@ class AskQuestion extends React.Component
 
     componentDidMount()
     {
-        if(localStorage.getItem("token")){
-            this.setState({loggedIn : true})
-        }
         this.fetchKeywords();
     }
 
@@ -47,17 +44,22 @@ class AskQuestion extends React.Component
     {
         e.preventDefault();
 
-        // connect with backend function
-        if(this.state.questionTitle && this.state.questionText && this.state.keywords)
+        if(this.state.questionTitle && this.state.questionText)
         {
-            // connect with backend function - send request
             let url = `http://localhost:5000/question`;
+            let keywords = []
+            if(this.state.keyword1 !== null)
+                keywords.push({"name": this.state.keyword1})
+            if((this.state.keyword2 !== null) && (this.state.keyword2 !== this.state.keyword1))
+                keywords.push({"name": this.state.keyword2})
+            if(this.state.keyword3 !== null && (this.state.keyword3 !== this.state.keyword1) && (this.state.keyword3 !== this.state.keyword2))
+                keywords.push({"name": this.state.keyword3})
 
             axios.post(url, 
                 {
                 title: this.state.questionTitle,
                 description: this.state.questionText,
-                keywords: []
+                keywords: keywords
             },{ headers: {
                 "Authorization": `bearer ${localStorage.getItem("token")}`
             }
@@ -70,7 +72,6 @@ class AskQuestion extends React.Component
             })
             .catch(error => {
                 console.error(error);
-                //this.setState({loggedOut: true})
                 this.props.logoutAction()
             });
         }
@@ -88,8 +89,6 @@ class AskQuestion extends React.Component
             }
         })
         .then(response => {
-            // handle success
-            console.log(response);
             let obj = response.data;
             JSON.stringify(obj);
             console.log(obj)
@@ -97,22 +96,16 @@ class AskQuestion extends React.Component
             if(this.state.sessionData) this.setState({responseReceived : true});
         })
         .catch(error => {
-            // handle error
             console.log(error);
             this.props.logoutAction()
         });
     }
     keywordOptions(){
-        console.log(this.state.sessionData)
-        console.log("hahahahah")
 
         return ( 
                 this.state.sessionData.map(keyword => (
-    
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <option key={keyword.name}>{keyword.name}</option> 
+                            <option key={keyword.name}>{keyword.name}</option> 
                     ))
-            // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
 
 
@@ -122,9 +115,8 @@ class AskQuestion extends React.Component
         
         if(this.state.questionAsked)
             return <Redirect to = "/myquestionsanswers"/>
-        if(this.state.loggedOut)
-            return <Redirect to = "/"/>
-        if(this.state.loggedIn) return (
+
+        return (
             <div className="App">
                 <div className = "main-window">
                     <header className="mainheader">
@@ -142,15 +134,14 @@ class AskQuestion extends React.Component
                             <label className = "regular-text">Keywords(choose up to 3 from existing keywords):</label>
                             <br />
                         </form>
-                        <select className = "dropdown" name = "question">
+                        <select name = "keyword1" value={this.state.keyword1} onChange = {this.handleChange} className = "dropdown">                              <option></option>
+                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        </select>
+                        <select name = "keyword2" value={this.state.keyword2} onChange = {this.handleChange} className = "dropdown">                              <option></option>
                               <option></option>
                               {this.state.responseReceived ? this.keywordOptions() : <div></div>}
                         </select>
-                        <select className = "dropdown" name = "question">
-                              <option></option>
-                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
-                        </select>
-                        <select className = "dropdown" name = "question">
+                        <select name = "keyword3" value={this.state.keyword3} onChange = {this.handleChange} className = "dropdown">                              <option></option>
                               <option></option>
                               {this.state.responseReceived ? this.keywordOptions() : <div></div>}
                         </select>
@@ -170,9 +161,6 @@ class AskQuestion extends React.Component
                     </Link>
                 </div>
             </div>
-        );
-        else return(
-            <Redirect to = "/"/>
         );
     }
 }

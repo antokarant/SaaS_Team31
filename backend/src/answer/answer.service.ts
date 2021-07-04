@@ -24,14 +24,19 @@ export class AnswerService {
             if(!user) throw new NotFoundException(`User ${userID} not found.`);
 
             const answer = await this.manager.create(Answer, createAnswerDto);
-            
+
             //console.log(createAnswerDto)
             answer.question = question;
             //let  newquestion = new Question();
             //newquestion.id = 1;
             //answer.question = newquestion;
             answer.user = user;
-            
+
+            // SOURCE: https://github.com/typeorm/typeorm/blob/master/docs/entity-manager-api.md
+            console.log(questionID);
+            console.log(question.answerCount);
+            let c = question.answerCount + 1;
+            await this.manager.update(Question, questionID, { answerCount: c });
             return this.manager.save(answer);
         });
     }
@@ -46,7 +51,7 @@ export class AnswerService {
         .getMany()
         console.log(result)
         return result
-    
+
     }
 
     async findOne(id: number): Promise<Answer> {
@@ -68,6 +73,7 @@ export class AnswerService {
         return this.manager.transaction(async manager => {
             const answer = await manager.findOne(Answer, id);
             if(!answer) throw new NotFoundException(`Answer ${id} not found.`);
+            await manager.update(Question, answer.question.id, { answerCount: answer.question.answerCount - 1 });
             await manager.delete(Answer, id);
         });
     }

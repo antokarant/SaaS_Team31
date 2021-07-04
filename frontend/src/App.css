@@ -340,3 +340,46 @@ header {
     width:20vw;
     margin: auto;
 }
+
+.left-text {
+    text-align: left;
+}
+
+.vote-box {
+    position: relative;
+    width: 3%;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+}
+
+.vote-box-positive {
+    border: 1px solid darkgreen;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.vote-box-negative {
+    border: 1px solid darkred;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkred;
+    background-color: pink;
+}
+
+.q-desc-contain {
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+    clear: both;
+}
+
+.q-desc-details {
+    position: relative;
+    display: block;
+    font-style: italic;
+    clear: both;
+}

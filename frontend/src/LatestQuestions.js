@@ -1,10 +1,9 @@
 import './App.css';
 import axios from 'axios';
-import WriteAnswer from './WriteAnswer';
 import React from 'react';
 import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
-class AllQuestions extends React.Component
+class LatestQuestions extends React.Component
 {
 
     constructor(props)
@@ -12,8 +11,6 @@ class AllQuestions extends React.Component
         super(props);
         console.log("which came first")
         this.state = {
-            loggedIn: props.loggedIn,
-            username: "Agent47",
             questions: null,
             responseReceived: false,
             sessionData: null
@@ -26,9 +23,6 @@ class AllQuestions extends React.Component
 
     componentDidMount()
     {
-        if(localStorage.getItem("token")){
-            this.setState({loggedIn : true})
-        }
         this.fetchQuestions();
     }
 
@@ -43,7 +37,7 @@ class AllQuestions extends React.Component
 
     fetchQuestions()
     {
-        let url = `http://localhost:5000/question`;
+        let url = `http://localhost:5000/question/latest`;
         axios.get(url,
             {
                 headers: {
@@ -51,16 +45,12 @@ class AllQuestions extends React.Component
             }
         })
         .then(response => {
-            // handle success
-            console.log("REQUEST SENT");
-            console.log(response);
             let obj = response.data;
             JSON.stringify(obj);
             this.setState({sessionData: obj});
             if(this.state.sessionData) this.setState({responseReceived : true});
         })
         .catch(error => {
-            // handle error
             console.log(error);
             this.props.logoutAction()
         });
@@ -86,7 +76,7 @@ class AllQuestions extends React.Component
 
     render()
     {
-        if(this.state.loggedIn) return (
+        return (
             <div className="App">
                 {console.log(this.state.loggedIn)}
                 <div className = "main-window">
@@ -94,13 +84,7 @@ class AllQuestions extends React.Component
                 </div>
             </div>
         );
-        else return (
-            <div>
-            {console.log("byeee")}
-            <Redirect to = "/"/>
-            </div>
-        );
     }
 }
 
-export default AllQuestions;
+export default LatestQuestions;

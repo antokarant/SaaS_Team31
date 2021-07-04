@@ -1,6 +1,5 @@
 import './App.css';
 import axios from 'axios';
-import WriteAnswer from './WriteAnswer';
 import React from 'react';
 import {Route, Link, BrowserRouter, Redirect} from 'react-router-dom';
 
@@ -10,30 +9,21 @@ class Question extends React.Component
     constructor(props)
     {
         super(props);
-        console.log("which came first")
         this.state = {
-            loggedIn: props.loggedIn,
-            questions: null,
             responseReceived: false,
             sessionData: null,
             id: this.props.match.params.id,
-            loggedOut: false,
             answer: null
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.fetchQuestions = this.fetchQuestions.bind(this);
-        this.displayQuestions = this.displayQuestions.bind(this);
+        this.displayQuestion = this.displayQuestion.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
     }
 
     componentDidMount()
     {
-        console.log("we are here 2")
-        if(document.cookie){
-            console.log("i am logged in")
-            this.setState({loggedIn : true})
-        }
         this.fetchQuestions();
     }
 
@@ -48,7 +38,6 @@ class Question extends React.Component
 
     fetchQuestions()
     {
-        console.log("we are here bla bla bla")
         let url = `http://localhost:5000/question/id/${this.state.id}`;
         axios.get(url,
             {
@@ -57,51 +46,47 @@ class Question extends React.Component
             }
         })
         .then(response => {
-            // handle success
-            console.log("REQUEST SENT");
-            console.log(response);
             let obj = response.data;
             JSON.stringify(obj);
             this.setState({sessionData: obj});
             if(this.state.sessionData) this.setState({responseReceived : true});
         })
         .catch(error => {
-            // handle error
             console.log(error);
-            //this.props.action()
-            //this.setState({loggedOut: true})
+            this.props.logoutAction()
         });
     }
 
-    displayQuestions()
+    displayQuestion()
     {
-        let answer = this.state.sessionData
-        console.log("inside display");
+        let question = this.state.sessionData;
         return (
             <div>
-                {
-    
-                        // <div>{Object.entries(dict).map(([key, value]) => <div> {JSON.stringify(value)} </div> )}</div>
-                        <div> {answer.id} {answer.positiveVotes} {answer.negativeVotes} {answer.text} {answer.user.id}</div>
-                  
-                }
+                <header>{question.title}</header>
+                <div className = "vote-box">
+                    <div className = "vote-box-positive">{question.upvotes}</div>
+                    <div className = "vote-box-negative">{question.downvotes}</div>
+                </div>
+                <div className = "q-desc-contain">
+                    <span className = "left-text">{question.description}</span>
+                    <span className = "left-text q-desc-details">asked by {question.user.username}</span>
+                    <span className = "q-desc-details">on {question.createdOn.slice(0, 10)}</span>
+                </div>
+                <div>Answers</div>
             </div>
-            // <div>{JSON.stringify(this.state.sessionData[0])}</div>
         );
     }
     handleAnswerSubmit(e){
-        e.preventDefault();
-        console.log(this.state.answer)
-        // connect with backend function
+        //e.preventDefault();
+
         if(this.state.answer)
         {
-            // connect with backend function - send request
             let url = `http://localhost:5000/answer`;
 
-            axios.post(url, 
+            axios.post(url,
                 {
                 text: this.state.answer,
-                question:{"id": this.state.id} 
+                question:{"id": this.state.id}
             },{ headers: {
                 "Authorization": `bearer ${localStorage.getItem("token")}`
             }
@@ -113,7 +98,7 @@ class Question extends React.Component
             })
             .catch(error => {
                 console.error(error);
-                //this.setState({loggedOut: true})
+                this.props.logoutAction()
             });
         }
         else
@@ -126,15 +111,14 @@ class Question extends React.Component
     render()
     {
 
-        if(true) return (
+        return (
             <div className="App">
                 {console.log(this.state.loggedIn)}
                 <div className = "main-window">
-                    {this.state.responseReceived ? this.displayQuestions() : <div></div>}
+                    {this.state.responseReceived ? this.displayQuestion() : <div></div>}
                 </div>
                 <form>
                       <div>
-                          <label className = "regular-text">Select a question:</label>
                           <br />
                       </div>
                       <br />
@@ -149,17 +133,9 @@ class Question extends React.Component
                       <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
                           <span className = "regular-text" >Answer</span>
                     </button>
-                      
+
               </div>
                   </form>
-                  
-                <Link to = "/">button</Link>
-            </div>
-        );
-        else return (
-            <div>
-            {console.log("byeee")}
-            <Redirect to = "/"/>
             </div>
         );
     }

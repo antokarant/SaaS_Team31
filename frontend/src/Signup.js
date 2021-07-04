@@ -37,7 +37,6 @@ class Signup extends React.Component
         event.preventDefault()
         if((!(this.state.givenName && this.state.givenPassword && this.state.givenPassword2)) || !(this.state.givenPassword === this.state.givenPassword2)){
             this.setState({error: true})
-            // alert("message")
         }else {      
             let url = `http://localhost:5000/user`;
             axios.post(url,
@@ -59,7 +58,6 @@ class Signup extends React.Component
     {
         let target = event.target;
         let value = target.value;
-// must check for type if datatypes are different, here both are strings
         let name = target.name;
 
         this.setState({ [name]: value });
