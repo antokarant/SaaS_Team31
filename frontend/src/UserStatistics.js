@@ -51,7 +51,7 @@ class UserStatistics extends React.Component
         // extract YYYY-MM from date string
         let m = d.getMonth() + 1; // January is 0
         m = m.toString();
-        if(m.length == 1) m = "0" + m;
+        if(m.length === 1) m = "0" + m;
 
         let s = d.getFullYear() + "-" + m;
         latestMonths[length - 1] = s;

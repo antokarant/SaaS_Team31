@@ -30,7 +30,8 @@ class App extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.loginCallbackFunction = this.loginCallbackFunction.bind(this);
         this.logoutCallbackFunction = this.logoutCallbackFunction.bind(this);
-        this.LoginProcess = this.LoginProcess.bind(this);
+        this.healthcheck = this.healthcheck.bind(this);
+
 
     }
     componentDidMount() {
@@ -43,6 +44,25 @@ class App extends React.Component {
             let username = localStorage.getItem('username')
             this.setState({loggedIn: true, username: username})
         }
+        this.healthcheck()
+    }
+    healthcheck(){
+        let url = `http://localhost:5000/healthcheck`;
+        axios.get(url,
+            {
+                headers: {
+                "Authorization": `bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(response => {
+
+        })
+        .catch(error => {
+            console.log(error);
+            this.logoutCallbackFunction()
+        });
+
+
     }
     handleSubmit(){
         if(this.state.loggedIn===false)
@@ -54,7 +74,6 @@ class App extends React.Component {
         this.setState({loggedIn: true})
         this.setState({"username": username})
         localStorage.setItem('username', username)
-
     }
     logoutCallbackFunction = () => {
         var mydate = new Date();
@@ -159,33 +178,5 @@ class App extends React.Component {
             </div>
             );
     };
-    LoginProcess(){
-        let url = `http://localhost:5000/auth/login`;
-        axios.post(url,
-            querystring.stringify({
-                "username": this.state.givenName,
-                "password": this.state.givenPassword
-            }),
-            ).then(res => {
-                    let obj = res.data;
-                    JSON.stringify(obj)
-                    this.setState({token: obj.access_token})
-                    document.cookie = obj.access_token;
-                    if(obj.access_token)
-                            this.setState({loggedIn: true,})
-
-        })
-        .catch(error => {
-            this.setState({token: null, loggedIn: false})
-        });
-        return ;
-    }
-
-/*<div className="header">
-                            <Link to = "/" className="closeButton">
-                            <button className="test">x</button>
-                            </Link>
-                        </div>
-auto einai gia to x pou den epaize kala*/
 }
 export default App;

@@ -132,16 +132,17 @@ class AskQuestion extends React.Component
                             <label className = "regular-text">Keywords(choose up to 3 from existing keywords):</label>
                             <br />
                         </form>
-                        <select name = "keyword1" value={this.state.keyword1} onChange = {this.handleChange} className = "dropdown">                              <option></option>
-                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        <select name = "keyword1" value={this.state.keyword1} onChange = {this.handleChange} className = "dropdown">
+                            <option></option>
+                            {this.state.responseReceived ? this.keywordOptions() : <div></div>}
                         </select>
-                        <select name = "keyword2" value={this.state.keyword2} onChange = {this.handleChange} className = "dropdown">                              <option></option>
-                              <option></option>
-                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        <select name = "keyword2" value={this.state.keyword2} onChange = {this.handleChange} className = "dropdown">
+                            <option></option>
+                            {this.state.responseReceived ? this.keywordOptions() : <div></div>}
                         </select>
-                        <select name = "keyword3" value={this.state.keyword3} onChange = {this.handleChange} className = "dropdown">                              <option></option>
-                              <option></option>
-                              {this.state.responseReceived ? this.keywordOptions() : <div></div>}
+                        <select name = "keyword3" value={this.state.keyword3} onChange = {this.handleChange} className = "dropdown">
+                            <option></option>
+                            {this.state.responseReceived ? this.keywordOptions() : <div></div>}
                         </select>
 
                     </div>

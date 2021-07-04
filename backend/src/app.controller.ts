@@ -17,4 +17,9 @@ export class AppController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }  
+  @UseGuards(JwtAuthGuard)
+  @Get('healthcheck')
+  async healthcheck() {
+    return true;
+  }  
 }
