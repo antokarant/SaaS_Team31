@@ -6,9 +6,9 @@
     --background: #C8EEF9;
     /* THE ABOVE ARE NOT BEING USED AT THE MOMENT */
 
-    --primary-deep: #103C5F;
+    --primary-deep: #103C5F; /* 10 59 95 */
     --primary-light: #55BDCA;
-    --secondary-deep: #DF622C;
+    --secondary-deep: #DF622C; /* 223 98 55 */
     --secondary-light: #F07C41;
 
     --main-font: "Comic Sans MS", sans-serif;
@@ -48,16 +48,14 @@
     overflow: auto;
 }
 
-.header {
-  /*width: 100%;
-  height: 5%;*/
-  background-color: var(--primary-deep);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
+header {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .closeButton {
@@ -332,5 +330,56 @@
 }
 
 .label-block {
+    clear: both;
+}
+
+.chart-container {
+    position: relative;
+    display: inline-block;
+    height:10vh;
+    width:20vw;
+    margin: auto;
+}
+
+.left-text {
+    text-align: left;
+}
+
+.vote-box {
+    position: relative;
+    width: 3%;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+}
+
+.vote-box-positive {
+    border: 1px solid darkgreen;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.vote-box-negative {
+    border: 1px solid darkred;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkred;
+    background-color: pink;
+}
+
+.q-desc-contain {
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+    clear: both;
+}
+
+.q-desc-details {
+    position: relative;
+    display: block;
+    font-style: italic;
     clear: both;
 }
