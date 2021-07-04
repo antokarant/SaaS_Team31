@@ -68,7 +68,7 @@ class QuestionsKeyword extends React.Component
                 this.state.questionData.map(question => (
                     <div className = "qa-block" key = {question.id} >
                         <Link to = {`/question/${question.id}`} className = "link-text">
-                            <div><div className = "qa-block-title">{question.title}</div> </div>
+                            <div><div className = "qa-block-title">{question.title}</div> <div className = "qa-block-keywords">{question.keywords.map(keyword => (<div className = "keyword-box">{keyword.name}</div>))}</div> <div className = "qa-block-details">asked by {question.user.username} on {question.createdOn.slice(0, 10)}</div></div>
                         </Link>
                     </div>
 
@@ -103,9 +103,7 @@ class QuestionsKeyword extends React.Component
                 result.map(keyword => (
                         <option key={keyword.name}>{keyword.name}</option>
                     ))
-        );
-
-
+        );        
     }
 
     render()
@@ -126,8 +124,6 @@ class QuestionsKeyword extends React.Component
                     </button>
 
                 </div>
-
-                <Link to = "/">Homepage</Link>
             </div>
         );
     }

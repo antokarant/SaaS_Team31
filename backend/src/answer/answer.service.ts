@@ -48,6 +48,7 @@ export class AnswerService {
         .leftJoinAndSelect('answer.question', 'question')
         .leftJoinAndSelect('answer.comments', 'comments')
         .where('answer.userID = :id', {id})
+        .orderBy('answer.createdOn', 'DESC')
         .getMany()
         console.log(result)
         return result

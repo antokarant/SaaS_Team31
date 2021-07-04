@@ -42,6 +42,7 @@ export class QuestionService {
         .leftJoinAndSelect('question.answers', 'answers')
         .leftJoinAndSelect('question.keywords', 'keywords')
         .where('question.userID = :id', {id})
+        .orderBy('question.createdOn', 'DESC')
         .getMany()
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         return result;
@@ -62,6 +63,7 @@ export class QuestionService {
 // SOURCE https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
     async findUnanswered() {
         const result = await this.manager.find(Question, {
+            order: {createdOn: 'DESC'},
             relations: ["user", "answers", "keywords"],
             where: {
                 answerCount: 0
@@ -72,10 +74,13 @@ export class QuestionService {
     }
 
     async findAllKeyword(keyword) {
-        let finalResult = []
-        console.log(keyword)
         const result = await this.manager.findOne(Keyword,keyword, {relations: ["questions"]})
-        return result.questions
+        let finalresult = []
+        for(const q of result.questions.reverse()){
+            const tempresult = await this.manager.findOne(Question,q.id, {relations: ["keywords", "answers", "user"]})
+            finalresult.push(tempresult)
+        }
+        return finalresult
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         //return [];
     }
