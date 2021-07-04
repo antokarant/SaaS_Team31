@@ -3,10 +3,10 @@ import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { Question } from './entities/question.entity';
 import { User } from '../user/entities/user.entity';
+import { Answer } from '../answer/entities/answer.entity';
 import { Keyword } from '../keyword/entities/keyword.entity';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
-
 
 @Injectable()
 export class QuestionService {
@@ -75,19 +75,26 @@ export class QuestionService {
 
     async findAllKeyword(keyword) {
         const result = await this.manager.findOne(Keyword,keyword, {relations: ["questions"]})
-        let finalresult = []
-        for(const q of result.questions.reverse()){
-            const tempresult = await this.manager.findOne(Question,q.id, {relations: ["keywords", "answers", "user"]})
-            finalresult.push(tempresult)
+        let finalresult = [];
+        for(const q of result.questions.reverse())
+        {
+            const tempresult = await this.manager.findOne(Question, q.id, {relations: ["keywords", "answers", "user"]});
+            finalresult.push(tempresult);
         }
-        return finalresult
+        return finalresult;
         //return this.manager.find(Question, { relations: ["user", "keyword"] });
         //return [];
     }
 
     async findOne(id: number): Promise<Question> {
-        const question = await this.manager.findOne(Question, id, { relations: ["user", "keywords", "answers"] });
+        let question = await this.manager.findOne(Question, id, { relations: ["user", "keywords", "answers"] });
         if(!question) throw new NotFoundException(`Question ${id} not found.`);
+        for(let a in question.answers)
+        {
+            const answer = await this.manager.findOne(Answer, question.answers[a].id, {relations: ["user"]});
+            question.answers[a] = answer;
+        }
+
         return question;
     }
 

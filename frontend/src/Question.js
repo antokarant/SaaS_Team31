@@ -17,14 +17,14 @@ class Question extends React.Component
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.fetchQuestions = this.fetchQuestions.bind(this);
+        this.fetchQuestion = this.fetchQuestion.bind(this);
         this.displayQuestion = this.displayQuestion.bind(this);
         this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
     }
 
     componentDidMount()
     {
-        this.fetchQuestions();
+        this.fetchQuestion();
     }
 
     handleChange(event)
@@ -36,7 +36,7 @@ class Question extends React.Component
         this.setState({ [name]: value });
     }
 
-    fetchQuestions()
+    fetchQuestion()
     {
         let url = `http://localhost:5000/question/id/${this.state.id}`;
         axios.get(url,
@@ -76,6 +76,33 @@ class Question extends React.Component
             </div>
         );
     }
+
+    displayAnswers()
+    {
+        let answers = this.state.sessionData.answers;
+        console.log(answers);
+        return (
+            <div>
+                {
+                    answers.map(answer => (
+                        <div className = "ans-block">
+                            <div className = "vote-box">
+                                <div className = "vote-box-positive">{answer.upvotes}</div>
+                                <div className = "vote-box-negative">{answer.downvotes}</div>
+                            </div>
+                            <div key = {answer.id} className = "ans-contain">
+                                <span className = "left-text">{answer.text}</span>
+                                <span className = "left-text ans-details">answered by {answer.user.username}</span>
+                                <span className = "ans-details">on {answer.createdOn.slice(0, 10)}</span>
+                            </div>
+                        </div>
+
+                        ))
+                }
+            </div>
+        );
+    }
+
     handleAnswerSubmit(e){
         //e.preventDefault();
 
@@ -114,6 +141,7 @@ class Question extends React.Component
             <div className="App">
                 <div className = "main-window">
                     {this.state.responseReceived ? this.displayQuestion() : <div></div>}
+                    {this.state.responseReceived ? this.displayAnswers() : <div></div>}
                 </div>
                 <form>
                       <div>
@@ -124,7 +152,7 @@ class Question extends React.Component
                       <div>
                           <label className = "regular-text" >Your answer:</label>
                           <br />
-                          <textarea  name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
+                          <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
                       </div>
                       <br />
                       <div className="footnote-wrapper">

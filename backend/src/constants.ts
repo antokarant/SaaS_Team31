@@ -1,4 +1,3 @@
 export const jwtConstants = {
-    secret : "antonis",
-    
+    secret : "saas31",
 };

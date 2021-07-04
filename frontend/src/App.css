@@ -241,8 +241,9 @@ header {
 }
 
 .text-field {
-    width: 100%;
+    width: 80%;
     box-sizing: border-box;
+    display: block;
 }
 
 .user-form {
@@ -380,4 +381,24 @@ header {
     display: block;
     font-style: italic;
     clear: both;
+}
+
+.ans-contain {
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+    clear: both;
+}
+
+.ans-details {
+    position: relative;
+    display: block;
+    font-style: italic;
+    clear: both;
+}
+
+textarea {
+    width: 80%;
+    resize: none;
 }
