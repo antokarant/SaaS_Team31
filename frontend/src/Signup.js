@@ -79,7 +79,7 @@ class Signup extends React.Component
                             <form>
                                 <table>
                                     <tr>
-                                        <td><label className = "regular-text">User name (e-mail):</label></td>
+                                        <td><label className = "regular-text">Username:</label></td>
                                         <td><input type = "text"  name = "givenName" value={this.state.givenName} onChange={this.handleChange} /></td>
                                     </tr>
                                     <br />

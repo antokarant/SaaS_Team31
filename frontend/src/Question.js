@@ -104,7 +104,7 @@ class Question extends React.Component
     }
 
     handleAnswerSubmit(e){
-        //e.preventDefault();
+        e.preventDefault();
 
         if(this.state.answer)
         {
@@ -121,6 +121,7 @@ class Question extends React.Component
             .then(res => {
                 let obj = res.data;
                 JSON.stringify(obj)
+                this.fetchQuestion()
             })
             .catch(error => {
                 console.error(error);
