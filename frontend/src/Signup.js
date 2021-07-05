@@ -65,7 +65,7 @@ class Signup extends React.Component
     render()
     {
         if(this.state.signedup)
-            return <Redirect to = '/'/>
+            return <Redirect to = '/login'/>
         if(!this.state.loggedIn)
         return (
             <div className="App">
@@ -99,8 +99,8 @@ class Signup extends React.Component
                                 </table>
                             </form>  
                         </div>
+                        (After successfully signing up you need to login to your account)
                     </div>
-                    (After successfully signing up you need to login to your account)
                 </div>
 
                 <div className = "footnote-wrapper">

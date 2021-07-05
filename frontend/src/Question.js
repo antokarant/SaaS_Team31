@@ -72,7 +72,6 @@ class Question extends React.Component
                     <span className = "left-text q-desc-details">asked by {question.user.username}</span>
                     <span className = "q-desc-details">on {question.createdOn.slice(0, 10)}</span>
                 </div>
-                <div>Answers</div>
             </div>
         );
     }
@@ -83,6 +82,7 @@ class Question extends React.Component
         console.log(answers);
         return (
             <div>
+                <header>Answers</header>
                 {
                     answers.map(answer => (
                         <div className = "ans-block">
@@ -122,6 +122,8 @@ class Question extends React.Component
                 let obj = res.data;
                 JSON.stringify(obj)
                 this.fetchQuestion()
+                this.setState({answer: null})
+                console.log(this.state.answer)
             })
             .catch(error => {
                 console.error(error);
@@ -141,29 +143,32 @@ class Question extends React.Component
         return (
             <div className="App">
                 <div className = "main-window">
-                    {this.state.responseReceived ? this.displayQuestion() : <div></div>}
-                    {this.state.responseReceived ? this.displayAnswers() : <div></div>}
-                </div>
-                <form>
-                      <div>
-                          <br />
-                      </div>
-                      <br />
-                      <br />
-                      <div>
-                          <label className = "regular-text" >Your answer:</label>
-                          <br />
-                          <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
-                      </div>
-                      <br />
-                      <div className="footnote-wrapper">
-                      <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
-                          <span className = "regular-text" >Answer</span>
-                    </button>
 
-              </div>
-                  </form>
+                        {this.state.responseReceived ? this.displayQuestion() : <div></div>}
+                        <br />
+                        <br />
+                        {this.state.responseReceived ? this.displayAnswers() : <div></div>}
+                        <form>
+                            <div>
+                                <br />
+                            </div>
+                            <br />
+                            <br />
+                            <div>
+                                <label className = "regular-text" >Your answer:</label>
+                                <br />
+                                <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
+                            </div>
+                            <br />
+                            <div className="footnote-wrapper">
+                                <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
+                                    <span className = "regular-text" >Answer</span>
+                                </button>
+                            </div>
+                        </form>
+                </div>
             </div>
+
         );
     }
 }

@@ -30,7 +30,7 @@
   margin-left: 2%;
   margin-right: 2%;
   font-family: var(--main-font);
-  overflow: auto;
+  overflow: none;
     position: relative;
     height:80%;
 }
@@ -45,7 +45,7 @@
     padding-bottom: 1%;
 
     font-family: var(--main-font);
-    overflow: auto;
+    overflow: none;
 }
 
 header {
@@ -213,8 +213,18 @@ header {
 
 .main-window {
     display: block;
-    height: 55%;
+    height: 85%;
+    overflow: auto;
+
+    
 }
+.main-window2 {
+    display: block;
+    height: 85%;
+    overflow: hidden;
+
+}
+
 
 .main-area {
     margin-left: 10%;
@@ -225,7 +235,7 @@ header {
     /*border: 2px solid red;*/
     overflow: hidden;
     position:relative;
-    height: 100%;
+    height: 85%;
 }
 
 .box {
@@ -276,7 +286,7 @@ header {
     height: 450px;
     /*background-color: black;*/
     /*color: white;*/
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -396,6 +406,10 @@ header {
     display: block;
     font-style: italic;
     clear: both;
+}
+.ans-block {
+    overflow: hidden;
+
 }
 
 textarea {

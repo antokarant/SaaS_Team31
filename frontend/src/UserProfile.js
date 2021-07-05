@@ -24,7 +24,7 @@ class UserProfile extends React.Component {
     {
         return (
             <div className = "App">
-                <div className = "main-window">
+                <div className = "main-window2">
                     <header className="mainheader">
                         My Profile page
                     </header>
