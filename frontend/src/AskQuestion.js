@@ -15,15 +15,14 @@ class AskQuestion extends React.Component
             responseReceived:false,
             keyword1: null,
             keyword2: null,
-            keyword3: null
+            keyword3: null,
+            infoRequired: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.keywordOptions = this.keywordOptions.bind(this);
         this.fetchKeywords = this.fetchKeywords.bind(this);
-
-
     }
 
     componentDidMount()
@@ -55,7 +54,7 @@ class AskQuestion extends React.Component
             if(this.state.keyword3 !== null && (this.state.keyword3 !== this.state.keyword1) && (this.state.keyword3 !== this.state.keyword2))
                 keywords.push({"name": this.state.keyword3})
 
-            axios.post(url, 
+            axios.post(url,
                 {
                 title: this.state.questionTitle,
                 description: this.state.questionText,
@@ -76,7 +75,7 @@ class AskQuestion extends React.Component
         }
         else
         {
-            console.error("Information required");
+            this.setState({infoRequired: true});
         }
     }
     fetchKeywords(){
@@ -100,9 +99,9 @@ class AskQuestion extends React.Component
     }
     keywordOptions(){
 
-        return ( 
+        return (
                 this.state.sessionData.map(keyword => (
-                            <option key={keyword.name}>{keyword.name}</option> 
+                            <option key={keyword.name}>{keyword.name}</option>
                     ))
         );
 
@@ -110,7 +109,7 @@ class AskQuestion extends React.Component
     }
     render()
     {
-        
+
         if(this.state.questionAsked)
             return <Redirect to = "/myquestions"/>
 
@@ -144,6 +143,7 @@ class AskQuestion extends React.Component
                             <option></option>
                             {this.state.responseReceived ? this.keywordOptions() : <div></div>}
                         </select>
+                        {this.state.infoRequired ? <div>Please fill out both title and description!</div> : <div></div>}
 
                     </div>
                 </div>

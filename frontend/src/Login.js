@@ -32,7 +32,7 @@ class Login extends React.Component
 
     }
     handleSubmit = (event) =>
-    { 
+    {
         event.preventDefault()
         let url = `http://localhost:5000/auth/login`;
         axios.post(url,
@@ -41,13 +41,9 @@ class Login extends React.Component
                 "password": this.state.givenPassword
             }),
             ).then(res => {
-                    console.log("we are here")
                     let obj = res.data;
                     JSON.stringify(obj)
-                    console.log(obj.access_token)
                     this.setState({token: obj.access_token})
-                    console.log(this.state.token)
-                    document.cookie = obj.access_token;
                     localStorage.setItem("token", obj.access_token)
                     if(obj.access_token)
                             this.setState({loggedIn: true,})
@@ -94,7 +90,7 @@ class Login extends React.Component
                                         <button className = "small-btn"  onClick = {this.handleSubmit}>
                                             <span className = "regular-text">Login</span>
                                         </button>
-                                    
+
                                 </table>
                                 <br/>
                                 {this.state.error?"You need to give username and password":""}

@@ -10,7 +10,6 @@ class MyAnswers extends React.Component
     {
         super(props);
         this.state = {
-            questions: null,
             answersReceived: false,
             answersData: null,
         };
@@ -57,13 +56,23 @@ class MyAnswers extends React.Component
 
     displayAnswers()
     {
+        let distinctQuestions = [];
+        let foundIDs = []; // disgusting
+        for(const a of this.state.answersData)
+        {
+            if(!foundIDs.includes(a.question.id)) distinctQuestions.push(a.question);
+            foundIDs.push(a.question.id);
+        }
+
+        console.log(distinctQuestions);
+
         return (
             <div className = "qa-fetch-result">
                 {
-                this.state.answersData.map(answer => (
-                    <div className = "qa-block" key = {answer.id} >
-                        <Link to = {`/question/${answer.question.id}`} className = "link-text">
-                            <div><div className = "qa-block-title">{answer.question.title}</div> <div className = "qa-block-details">answered on {answer.createdOn.slice(0, 10)}</div></div>
+                distinctQuestions.map(question => (
+                    <div className = "qa-block" key = {question.id} >
+                        <Link to = {`/question/${question.id}`} className = "link-text">
+                            <div><div className = "qa-block-title">{question.title}</div> <div className = "qa-block-details">originally on {question.createdOn.slice(0, 10)}</div></div>
                         </Link>
                     </div>
 

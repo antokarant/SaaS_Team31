@@ -122,7 +122,7 @@ class Question extends React.Component
                 let obj = res.data;
                 JSON.stringify(obj)
                 this.fetchQuestion()
-                this.setState({answer: null})
+                this.setState({answer: ""})
                 console.log(this.state.answer)
             })
             .catch(error => {
