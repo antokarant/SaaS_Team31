@@ -35,7 +35,7 @@ class Home extends React.Component
                             <div className = "big-box">Questions per keyword</div>
                         </Link>
                         <Link to = "/latestquestions">
-                            <div className = "big-box">Latest questions</div>
+                            <div className = "big-box">Latest / Most popular questions</div>
                         </Link>
                         <Link to = "/askquestion">
                             <div className = "big-box"><span className = "regular-text">Ask a question</span></div>

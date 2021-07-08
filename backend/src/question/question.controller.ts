@@ -36,6 +36,11 @@ export class QuestionController {
     return this.questionService.findUnanswered();
   }
 
+  @Get('popular')
+  findMostPopular() {
+    return this.questionService.findMostPopular();
+  }
+
   @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.questionService.findOne(+id);

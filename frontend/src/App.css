@@ -216,7 +216,7 @@ header {
     height: 85%;
     overflow: auto;
 
-    
+
 }
 .main-window2 {
     display: block;
@@ -415,4 +415,11 @@ header {
 textarea {
     width: 80%;
     resize: none;
+}
+
+.main-area-quick-fix {
+    margin-left: 10%;
+    margin-right: 5%;
+    text-align: left;
+    position:relative;
 }

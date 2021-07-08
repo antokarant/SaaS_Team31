@@ -60,7 +60,7 @@ export class QuestionService {
         return result;
     }
 
-// SOURCE https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
+    // SOURCE https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
     async findUnanswered() {
         const result = await this.manager.find(Question, {
             order: {createdOn: 'DESC'},
@@ -70,6 +70,11 @@ export class QuestionService {
             }
         });
 
+        return result;
+    }
+
+    async findMostPopular() {
+        const result = await this.manager.find(Question, {order: {upvotes: 'DESC'}, take: 15, relations: ["user", "answers", "keywords"]})
         return result;
     }
 

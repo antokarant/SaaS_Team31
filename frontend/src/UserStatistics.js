@@ -22,6 +22,7 @@ class UserStatistics extends React.Component
             answerFrequency: null,
             latestMonths: null,
             loggedOut:false,
+            userChoice: "total",
         };
 
         this.fetchQuestions = this.fetchQuestions.bind(this);
@@ -30,6 +31,16 @@ class UserStatistics extends React.Component
         this.displayStats = this.displayStats.bind(this);
         this.populateFrequencyArray = this.populateFrequencyArray.bind(this);
         this.getLatestMonths = this.getLatestMonths.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event)
+    {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({ [name]: value });
     }
 
     componentDidMount()
@@ -167,70 +178,82 @@ class UserStatistics extends React.Component
                     <div>Total answers submitted {this.state.answerCount}</div>
                     <div>User score {this.state.voteCount}</div>
                 </div>
-                <div>Activity over time</div>
-                <div className = "chart-container">
-                    <Pie
-                        data = {{
-                            labels: ["Questions", "Answers"],
-                            datasets: [
-                                {
-                                    label: "Submitted by user",
-                                    data: pieData,
-                                    backgroundColor: [
-                                        'rgba(223, 98, 55, 0.2)',
-                                        'rgba(10, 59, 95, 0.2)',
-                                    ],
-                                    borderColor: [
-                                        'rgba(223, 98, 55, 1)',
-                                        'rgba(10, 59, 95, 1)',
-                                    ],
-                                    borderWidth: 1,
-                                },
-                            ],
-                        }}
-                    />
+
+                <div>Your activity</div>
+                <div onChange = {this.handleChange}>
+                    <input type = "radio" className = "btn-radio" value = "total" name = "userChoice" checked = {this.state.userChoice === "total"} />
+                    <label>Total</label>
+                    <input type = "radio" className = "btn-radio" value = "time" name = "userChoice" checked = {this.state.userChoice === "time"} />
+                    <label>Over time</label>
                 </div>
-                <div className = "chart-container">
-                    <Bar
-                        data = {{
-                            labels: this.state.latestMonths,
-                            datasets: [
-                                {
-                                    label: "Questions per month",
-                                    data: this.state.questionFrequency,
-                                    backgroundColor: [
-                                        'rgba(223, 98, 55, 0.2)',
-                                    ],
-                                    borderColor: [
-                                        'rgba(223, 98, 55, 1)',
-                                    ],
-                                    borderWidth: 1,
-                                },
-                            ],
-                        }}
-                    />
+                {this.state.userChoice === "total" ?
+                    <div className = "chart-container">
+                        <Pie
+                            data = {{
+                                labels: ["Questions", "Answers"],
+                                datasets: [
+                                    {
+                                        label: "Submitted by user",
+                                        data: pieData,
+                                        backgroundColor: [
+                                            'rgba(223, 98, 55, 0.2)',
+                                            'rgba(10, 59, 95, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(223, 98, 55, 1)',
+                                            'rgba(10, 59, 95, 1)',
+                                        ],
+                                        borderWidth: 1,
+                                    },
+                                ],
+                            }}
+                        />
+                    </div>
+                    : <div></div> }
+                {this.state.userChoice === "time" ?
+                <div>
+                    <div className = "chart-container">
+                        <Bar
+                            data = {{
+                                labels: this.state.latestMonths,
+                                datasets: [
+                                    {
+                                        label: "Questions per month",
+                                        data: this.state.questionFrequency,
+                                        backgroundColor: [
+                                            'rgba(223, 98, 55, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(223, 98, 55, 1)',
+                                        ],
+                                        borderWidth: 1,
+                                    },
+                                ],
+                            }}
+                        />
+                    </div>
+
+                    <div className = "chart-container">
+                        <Bar
+                            data = {{
+                                labels: this.state.latestMonths,
+                                datasets: [
+                                    {
+                                        label: "Answers per month",
+                                        data: this.state.answerFrequency,
+                                        backgroundColor: [
+                                            'rgba(10, 59, 95, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(10, 59, 95, 1)',
+                                        ],
+                                        borderWidth: 1,
+                                    },
+                                ],
+                            }}
+                        />
+                    </div></div> : <div></div> }
                 </div>
-                <div className = "chart-container">
-                    <Bar
-                        data = {{
-                            labels: this.state.latestMonths,
-                            datasets: [
-                                {
-                                    label: "Answers per month",
-                                    data: this.state.answerFrequency,
-                                    backgroundColor: [
-                                        'rgba(10, 59, 95, 0.2)',
-                                    ],
-                                    borderColor: [
-                                        'rgba(10, 59, 95, 1)',
-                                    ],
-                                    borderWidth: 1,
-                                },
-                            ],
-                        }}
-                    />
-                </div>
-            </div>
         );
     }
 
