@@ -78,6 +78,7 @@ class App extends React.Component {
     logoutCallbackFunction = () => {
         var mydate = new Date();
         localStorage.removeItem("token")
+        localStorage.removeItem("username")
         this.setState({loggedIn: false})
     }
     /*<button onClick={()=>console.log(this.state.loggedIn)}></button>

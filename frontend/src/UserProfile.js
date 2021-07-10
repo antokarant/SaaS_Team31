@@ -30,7 +30,7 @@ class UserProfile extends React.Component {
                     </header>
                     <div className = "main-area">
                         <Link to = "/stats">
-                            <div className = "big-box">My contributions per day</div>
+                            <div className = "big-box">My contributions</div>
                         </Link>
                         <Link to = "/myquestions">
                             <div className = "big-box">My questions</div>

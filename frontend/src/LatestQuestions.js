@@ -13,6 +13,7 @@ class LatestQuestions extends React.Component
             questions: null,
             responseReceived: false,
             popularQuestions: null,
+            popResponseReceived: false,
             LatestQuestions: null,
             sortBy: "latest",
         };
@@ -51,7 +52,7 @@ class LatestQuestions extends React.Component
             let obj = response.data;
             JSON.stringify(obj);
             this.setState({popularQuestions: obj});
-            if(this.state.popularQuestions) this.setState({responseReceived : true});
+            if(this.state.popularQuestions) this.setState({popResponseReceived : true});
         })
         .catch(error => {
             console.log(error);
@@ -127,7 +128,7 @@ class LatestQuestions extends React.Component
                             <option value = "popular">Most popular</option>
                         </select>
                     </div>
-                    {this.state.responseReceived ? this.displayQuestions() : <div></div>}
+                    {this.state.responseReceived && this.state.popResponseReceived ? this.displayQuestions() : <div></div>}
                 </div>
             </div>
         );
