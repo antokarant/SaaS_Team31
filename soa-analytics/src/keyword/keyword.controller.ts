@@ -14,11 +14,6 @@ export class KeywordController {
     return this.keywordService.create(createKeywordDto);
   }
 
-  @Get()
-  findAll() {
-    return this.keywordService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.keywordService.findOne(id);

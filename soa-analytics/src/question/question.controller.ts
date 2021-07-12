@@ -9,13 +9,7 @@ import { JwtAuthGuard } from '../jwt-auth.guard';
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
-  @Post()
-  create(@Body() createQuestionDto: CreateQuestionDto,@Request() req) {
-    console.log(createQuestionDto)
-    createQuestionDto.user = {"id": req.user.id}
-    console.log(createQuestionDto)
-    return this.questionService.create(createQuestionDto);
-  }
+ 
   @Get("user")
   findAllUser(@Request() req) {
     return this.questionService.findAllUser(req.user.id);
