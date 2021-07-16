@@ -17,10 +17,10 @@ export class Comment {
     text: string;
 
     @Column({ default: 0 })
-    positiveVotes: number;
+    upvotes: number;
 
     @Column({ default: 0 })
-    negativeVotes: number;
+    downvotes: number;
 
     @ManyToOne( () => Answer, answer => answer.comments, { nullable: true, onDelete: "CASCADE" })
     @JoinColumn({name : 'answerID'})

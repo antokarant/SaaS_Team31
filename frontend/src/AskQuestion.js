@@ -17,6 +17,8 @@ class AskQuestion extends React.Component
             keyword2: null,
             keyword3: null,
             infoRequired: false,
+            questionText: null,
+            questionTitle: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +44,7 @@ class AskQuestion extends React.Component
     handleSubmit(e)
     {
         e.preventDefault();
-
+        
         if(this.state.questionTitle && this.state.questionText)
         {
             let url = `http://localhost:5000/question`;
