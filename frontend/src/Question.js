@@ -63,14 +63,16 @@ class Question extends React.Component
         return (
             <div>
                 <header>{question.title}</header>
-                <div className = "vote-box">
-                    <div className = "vote-box-positive">{question.upvotes}</div>
-                    <div className = "vote-box-negative">{question.downvotes}</div>
-                </div>
-                <div className = "q-desc-contain">
-                    <span className = "left-text">{question.description}</span>
-                    <span className = "left-text q-desc-details">asked by {question.user.username}</span>
-                    <span className = "q-desc-details">on {question.createdOn.slice(0, 10)}</span>
+                <div className = "q-block">
+                    <div className = "vote-box">
+                        <div className = "vote-box-positive">{question.upvotes}</div>
+                        <div className = "vote-box-negative">{question.downvotes}</div>
+                    </div>
+                    <div className = "q-desc-contain">
+                        <span className = "left-text">{question.description}</span>
+                        <span className = "left-text q-desc-details">asked by {question.user.username}</span>
+                        <span className = "q-desc-details">on {question.createdOn.slice(0, 10)}</span>
+                    </div>
                 </div>
             </div>
         );
@@ -93,7 +95,7 @@ class Question extends React.Component
                             <div key = {answer.id} className = "ans-contain">
                                 <span className = "left-text">{answer.text}</span>
                                 <span className = "left-text ans-details">answered by {answer.user.username}</span>
-                                <span className = "ans-details">on {answer.createdOn.slice(0, 10)}</span>
+                                <span className = "right-text ans-details">on {answer.createdOn.slice(0, 10)}</span>
                             </div>
                         </div>
 

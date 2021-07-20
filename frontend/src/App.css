@@ -352,14 +352,19 @@ header {
 
 .left-text {
     text-align: left;
+    margin-left: 3%;
+}
+
+.right-text {
+    text-align: right;
 }
 
 .vote-box {
-    position: relative;
     width: 3%;
     margin: auto;
     display: inline-block;
     /*border: 1px solid black;*/
+    vertical-align: top;
 }
 
 .vote-box-positive {
@@ -384,6 +389,7 @@ header {
     display: inline-block;
     /*border: 1px solid black;*/
     clear: both;
+    width: 90%;
 }
 
 .q-desc-details {
@@ -399,6 +405,7 @@ header {
     display: inline-block;
     /*border: 1px solid black;*/
     clear: both;
+    width: 90%;
 }
 
 .ans-details {
@@ -408,8 +415,27 @@ header {
     clear: both;
 }
 .ans-block {
+    /*border: 1px solid black;*/
+    margin-left: 20%;
+    margin-right: 20%;
     overflow: hidden;
+    margin-bottom: 0.5%;
+}
+.ans-block::after {
+    content: '';
+    width: 100vw;
+    height: 2px;
+    left: 0;
+    display: block;
+    clear: both;
+    background-color: var(--primary-deep);
+}
 
+.q-block {
+    /*border: 1px solid black;*/
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow: hidden;
 }
 
 textarea {
