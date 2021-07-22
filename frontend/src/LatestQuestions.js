@@ -13,7 +13,9 @@ class LatestQuestions extends React.Component
             questions: null,
             responseReceived: false,
             popularQuestions: null,
+            popularKeywords: null,
             popResponseReceived: false,
+            keywordResponseReceived: false,
             LatestQuestions: null,
             sortBy: "latest",
         };
@@ -21,13 +23,16 @@ class LatestQuestions extends React.Component
         this.handleChange = this.handleChange.bind(this);
         this.fetchLatestQuestions = this.fetchLatestQuestions.bind(this);
         this.fetchPopularQuestions = this.fetchPopularQuestions.bind(this);
+        this.fetchPopularKeywords = this.fetchPopularKeywords.bind(this);
         this.displayQuestions = this.displayQuestions.bind(this);
+        this.displayKeywords = this.displayKeywords.bind(this);
     }
 
     componentDidMount()
     {
         this.fetchLatestQuestions();
         this.fetchPopularQuestions();
+        this.fetchPopularKeywords();
     }
 
     handleChange(event)
@@ -81,6 +86,28 @@ class LatestQuestions extends React.Component
         });
     }
 
+    fetchPopularKeywords()
+    {
+        let url = `http://localhost:5000/keyword/popular`;
+        axios.get(url,
+            {
+                headers: {
+                "Authorization": `bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(response => {
+            let obj = response.data;
+            console.log(obj);
+            JSON.stringify(obj);
+            this.setState({popularKeywords: obj});
+            if(this.state.popularKeywords) this.setState({keywordResponseReceived : true});
+        })
+        .catch(error => {
+            console.log(error);
+            this.props.logoutAction()
+        });
+    }
+
     displayQuestions()
     {
         if(this.state.sortBy === "latest")
@@ -115,6 +142,23 @@ class LatestQuestions extends React.Component
             );
     }
 
+    displayKeywords()
+    {
+        //console.log(this.state.popularKeywords);
+        return (
+            <div>
+                <div>Top Keywords</div>
+                {
+                this.state.popularKeywords.map(keyword => (
+                    <div key = {keyword.name} className = "inline-elements">
+                        <span className = "keyword-box">{keyword.name}</span><span className = "small-text">x{keyword.questions.length}</span>
+                    </div>
+                ))
+                }
+            </div>
+        );
+    }
+
     render()
     {
         return (
@@ -122,11 +166,14 @@ class LatestQuestions extends React.Component
                 <div className = "main-window">
                     <header>View questions</header>
                     <div className = "main-area-quick-fix">
-                        <div className = "left-text">Sort by</div>
-                        <select className = "dropdown" name = "sortBy" value = {this.state.sortBy} onChange={this.handleChange}>
-                            <option value = "latest">Latest</option>
-                            <option value = "popular">Most popular</option>
-                        </select>
+                        <div className = "sort-select-area">
+                            <div className = "left-text">Sort by</div>
+                            <select className = "dropdown" name = "sortBy" value = {this.state.sortBy} onChange={this.handleChange}>
+                                <option value = "latest">Latest</option>
+                                <option value = "popular">Most popular</option>
+                            </select>
+                        </div>
+                        <div className = "keyword-window">{this.state.keywordResponseReceived ? this.displayKeywords() : <div></div>}</div>
                     </div>
                     {this.state.responseReceived && this.state.popResponseReceived ? this.displayQuestions() : <div></div>}
                 </div>

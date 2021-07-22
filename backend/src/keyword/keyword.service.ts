@@ -27,8 +27,9 @@ export class KeywordService {
 
     async findMostPopular() {
         //const result = await this.manager.find(Keyword, {order: {questions.length: 'DESC'}, take: 5, relations: ["questions"]})
-        await this.manager.find(Keyword, {relations: ["questions"]})
-        .then(response => {
+        const response = await this.manager.find(Keyword, {relations: ["questions"]});
+        if(!response) throw new NotFoundException(`Not found`);
+        //.then(response => {
           // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
           let sorted = response.sort((k1, k2) => {return k2.questions.length - k1.questions.length});
 
@@ -41,7 +42,7 @@ export class KeywordService {
             console.log(k.name, " appears ", k.questions.length, " times");
           }
           */
-        })
+        //})
     }
 
     async update(name: string, updateKeywordDto: UpdateKeywordDto) : Promise<Keyword> {
