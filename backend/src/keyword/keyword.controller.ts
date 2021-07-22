@@ -19,6 +19,11 @@ export class KeywordController {
     return this.keywordService.findAll();
   }
 
+  @Get('popular')
+  findMostPopular() {
+    return this.keywordService.findMostPopular();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.keywordService.findOne(id);

@@ -7,6 +7,6 @@
     "database": "heroku_3b5201ffcf4498e",
     "entities": ["dist/**/*.entity.js"],
     "logging": true,
-    "synchronize": true
-    
+    "synchronize": false
+
 }

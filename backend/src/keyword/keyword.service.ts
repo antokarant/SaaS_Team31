@@ -25,6 +25,25 @@ export class KeywordService {
         return result;
     }
 
+    async findMostPopular() {
+        //const result = await this.manager.find(Keyword, {order: {questions.length: 'DESC'}, take: 5, relations: ["questions"]})
+        await this.manager.find(Keyword, {relations: ["questions"]})
+        .then(response => {
+          // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+          let sorted = response.sort((k1, k2) => {return k2.questions.length - k1.questions.length});
+
+          // https://stackoverflow.com/a/34883171
+          return sorted.slice(0, 5);
+          /*
+          for(const k of sorted.slice(0, 5))
+          {
+            console.log(k);
+            console.log(k.name, " appears ", k.questions.length, " times");
+          }
+          */
+        })
+    }
+
     async update(name: string, updateKeywordDto: UpdateKeywordDto) : Promise<Keyword> {
         // very important that the process be atomic, that is, account for the fact that the data might change during the update (bank accounts etc)
         return this.manager.transaction(async manager => {
