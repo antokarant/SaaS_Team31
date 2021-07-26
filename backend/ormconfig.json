@@ -6,6 +6,10 @@
     "password": "d05ee007",
     "database": "heroku_3b5201ffcf4498e",
     "entities": ["dist/**/*.entity.js"],
+    "migrations": ["migration/*.js"],
+    "cli": {
+        "migrationsDir": "migration"
+    },
     "logging": true,
     "synchronize": false
 
