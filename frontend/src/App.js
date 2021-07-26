@@ -97,12 +97,12 @@ class App extends React.Component {
                     </Link>
                         <Link to="/">
                             <span className="regular-text">
-                                <button onClick={this.logoutCallbackFunction} className="cool-btn">Log out</button>
+                                <button onClick={this.logoutCallbackFunction} className="cool-btn"><span className = "regular-text">Log out</span></button>
                             </span>
                         </Link>
                         <Link to = "/profile">
                             <button className = "cool-btn">
-                                {this.state.username}
+                                <span className = "regular-text">{this.state.username}</span>
                             </button>
                         </Link>
                     </div>

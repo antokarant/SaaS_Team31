@@ -26,23 +26,12 @@ export class KeywordService {
     }
 
     async findMostPopular() {
-        //const result = await this.manager.find(Keyword, {order: {questions.length: 'DESC'}, take: 5, relations: ["questions"]})
         const response = await this.manager.find(Keyword, {relations: ["questions"]});
         if(!response) throw new NotFoundException(`Not found`);
-        //.then(response => {
-          // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-          let sorted = response.sort((k1, k2) => {return k2.questions.length - k1.questions.length});
-
-          // https://stackoverflow.com/a/34883171
-          return sorted.slice(0, 5);
-          /*
-          for(const k of sorted.slice(0, 5))
-          {
-            console.log(k);
-            console.log(k.name, " appears ", k.questions.length, " times");
-          }
-          */
-        //})
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+        let sorted = response.sort((k1, k2) => {return k2.questions.length - k1.questions.length});
+        // https://stackoverflow.com/a/34883171
+        return sorted.slice(0, 5);
     }
 
     async update(name: string, updateKeywordDto: UpdateKeywordDto) : Promise<Keyword> {
