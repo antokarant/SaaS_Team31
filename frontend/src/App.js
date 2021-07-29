@@ -96,9 +96,9 @@ class App extends React.Component {
                         </div>
                     </Link>
                         <Link to="/">
-                            <span className="regular-text">
-                                <button onClick={this.logoutCallbackFunction} className="cool-btn"><span className = "regular-text">Log out</span></button>
-                            </span>
+                            <button onClick={this.logoutCallbackFunction} className="cool-btn">
+                                <span className = "regular-text">Log out</span>
+                            </button>
                         </Link>
                         <Link to = "/profile">
                             <button className = "cool-btn">
@@ -142,15 +142,14 @@ class App extends React.Component {
                         </div>
                     </Link>
                         <Link to="/login">
-                            <span className="regular-text">
-                                <button className="cool-btn">Log in</button>
-                            </span>
+                            <button className="cool-btn">
+                                <span className = "regular-text">Log in</span>
+                            </button>
                         </Link>
                         <Link to = "/signup">
-
-                        <button className = "cool-btn">
-                        Sign up
-                        </button>
+                            <button className = "cool-btn">
+                                <span className = "regular-text">Sign up</span>
+                            </button>
                         </Link>
                     </div>
                 </div>

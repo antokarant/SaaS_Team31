@@ -25,16 +25,10 @@ export class AnswerService {
 
             const answer = await this.manager.create(Answer, createAnswerDto);
 
-            //console.log(createAnswerDto)
             answer.question = question;
-            //let  newquestion = new Question();
-            //newquestion.id = 1;
-            //answer.question = newquestion;
             answer.user = user;
 
             // SOURCE: https://github.com/typeorm/typeorm/blob/master/docs/entity-manager-api.md
-            console.log(questionID);
-            console.log(question.answerCount);
             let c = question.answerCount + 1;
             await this.manager.update(Question, questionID, { answerCount: c });
             return this.manager.save(answer);

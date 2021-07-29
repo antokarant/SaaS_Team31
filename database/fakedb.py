@@ -30,8 +30,8 @@ def getFakeAnswer():
     return fake.paragraph(nb_sentences = 3, variable_nb_sentences = True)
 
 ## Generate keywords
-keywordList = []
-for _ in range(TOTAL_KEYWORDS): keywordList.append(getFakeKeyword())
+keywordList = ["nodejs", "car", "SaaS", "Euro", "Olympics", "PS5", "fashion", "politics", "world", "food", "ECE", "math", "Formula1", "gaming", "tennis"]
+## for _ in range(TOTAL_KEYWORDS): keywordList.append(getFakeKeyword())
 with open("keywords.json", 'w') as f:
     for k in keywordList:
         json.dump({"name": k}, f)
@@ -58,6 +58,7 @@ for _ in range(TOTAL_QUESTIONS):
     newQ.update({"upvotes": random.randint(0, 50)})
     newQ.update({"downvotes": random.randint(0, 5)})
     newQ.update({"user": random.choice(range(5, TOTAL_USERS * 10, 10))})
+    newQ.update({"keywords": random.sample(keywordList, k = random.randint(1, 3))})
     questionList.append(newQ)
 with open("questions.json", 'w') as f:
     for q in questionList:
@@ -71,8 +72,8 @@ for _ in range(TOTAL_ANSWERS):
     newA.update({"text": getFakeAnswer()})
     newA.update({"upvotes": random.randint(0, 50)})
     newA.update({"downvotes": random.randint(0, 5)})
-    newA.update({"user": random.choice(range(5, TOTAL_USERS * 10, 10))})
-    newA.update({"question": random.choice(range(5, TOTAL_QUESTIONS * 10, 10))})
+    newA.update({"user": {"id": random.choice(range(5, TOTAL_USERS * 10, 10))}})
+    newA.update({"question": {"id": random.choice(range(5, TOTAL_QUESTIONS * 10, 10))}})
     answerList.append(newA)
 with open("answers.json", 'w') as f:
     for a in answerList:
