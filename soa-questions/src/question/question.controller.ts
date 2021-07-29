@@ -11,9 +11,7 @@ export class QuestionController {
 
   @Post()
   create(@Body() createQuestionDto: CreateQuestionDto,@Request() req) {
-    console.log(createQuestionDto)
     createQuestionDto.user = {"id": req.user.id}
-    console.log(createQuestionDto)
     return this.questionService.create(createQuestionDto);
   }
   @Get("user")

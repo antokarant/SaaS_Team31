@@ -29,12 +29,12 @@ app.get('/info', (req, res, next) => {
 app.use('/auth/login', createProxyMiddleware({
     target: API_LOGIN_URL,
     changeOrigin: true,
-    
+
  }));
  app.use('/user', createProxyMiddleware({
     target: API_LOGIN_URL,
     changeOrigin: true,
-    
+
  }));
 
 
@@ -42,27 +42,32 @@ app.use('/auth/login', createProxyMiddleware({
 app.use('/question/popular', createProxyMiddleware({
    target: API_SERVER2_URL,
    changeOrigin: true,
-   
+
 }));
 app.use('/question/unanswered', createProxyMiddleware({
    target: API_SERVER2_URL,
    changeOrigin: true,
-   
+
 }));
 app.use('/question/latest', createProxyMiddleware({
     target: API_SERVER2_URL,
     changeOrigin: true,
-    
+
  }));
 app.use('/question/keyword/:keyword', createProxyMiddleware({
    target: API_SERVER2_URL,
    changeOrigin: true,
-   
+
 }));
 app.use('/question/user', createProxyMiddleware({
    target: API_SERVER2_URL,
    changeOrigin: true,
-   
+
+}));
+app.use('/keyword/popular', createProxyMiddleware({
+   target: API_SERVER2_URL,
+   changeOrigin: true,
+
 }));
 
 
@@ -72,27 +77,32 @@ app.use('/question/user', createProxyMiddleware({
  app.use('/question/id/:id', createProxyMiddleware({
     target: API_SERVER1_URL,
     changeOrigin: true,
-    
+
+ }));
+ app.use('/keyword/id/:id', createProxyMiddleware({
+    target: API_SERVER1_URL,
+    changeOrigin: true,
+
  }));
  app.use('/answer', createProxyMiddleware({
     target: API_SERVER1_URL,
     changeOrigin: true,
-    
+
  }));
  app.use('/question', createProxyMiddleware({
     target: API_SERVER1_URL,
     changeOrigin: true,
-    
+
  }));
  app.use('/keyword', createProxyMiddleware({
     target: API_SERVER1_URL,
     changeOrigin: true,
-    
+
  }));
  app.use('/healthcheck', createProxyMiddleware({
     target: API_SERVER1_URL,
     changeOrigin: true,
-    
+
  }));
 
  // Start the Proxy

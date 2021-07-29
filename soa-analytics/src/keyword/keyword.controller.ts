@@ -14,9 +14,14 @@ export class KeywordController {
     return this.keywordService.create(createKeywordDto);
   }
 
-  @Get(':id')
+  @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.keywordService.findOne(id);
+  }
+
+  @Get('popular')
+  findMostPopular() {
+    return this.keywordService.findMostPopular();
   }
 
   @Patch(':id')
