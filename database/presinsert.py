@@ -10,38 +10,21 @@ mydb = mysql.connector.connect(
 )
 
 cur = mydb.cursor()
-
-## Insert users
-uid = 5
-with open("users.json", 'r') as f:
-    for line in f:
-        u = json.loads(line)
-        query = 'INSERT INTO `user` (id, username, password, createdOn, updatedOn) VALUES ({}, "{}", "{}", curDate(), curDate());'.format(uid, u["username"], u["password"])
-        cur.execute(query)
-        mydb.commit()
-        uid += 10
-        
-## Insert keywords
-with open("keywords.json", 'r') as f:
-    for line in f:
-        k = json.loads(line)
-        query = 'INSERT INTO keyword (name) VALUES ("{}");'.format(k["name"])
-        cur.execute(query)
-        mydb.commit()
-        
+''' 
 ## Insert questions
-qid = 5
-with open("questions.json", 'r') as f:
+qid = 505
+with open("presquestions.json", 'r') as f:
     for line in f:
         q = json.loads(line)
         query = 'INSERT INTO question (id, title, description, createdOn, updatedOn, upvotes, downvotes, answerCount, userID) VALUES ({}, "{}", "{}", curDate(), curDate(), {}, {}, 0, {});'.format(qid, q["title"], q["description"], q["upvotes"], q["downvotes"], q["user"])
         cur.execute(query)
         mydb.commit()
         qid += 10
-        
+mydb.close()
+  
 ## Insert question keyword relations
-qid = 5
-with open("questions.json", 'r') as f:
+qid = 505
+with open("presquestions.json", 'r') as f:
     for line in f:
         q = json.loads(line)
         for kw in q["keywords"]:
@@ -49,9 +32,9 @@ with open("questions.json", 'r') as f:
             cur.execute(query)
             mydb.commit()
         qid += 10
-        
+'''      
 ## Insert answers
 url = 'http://localhost:5000/answer'
-with open("answers.json", 'r') as f:
+with open("presanswers.json", 'r') as f:
     for i in f:
         r = requests.post(url, json = json.loads(i), verify = False)

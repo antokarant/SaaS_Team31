@@ -349,8 +349,8 @@ header {
 .chart-container {
     position: relative;
     display: inline-block;
-    height:10vh;
-    width:20vw;
+    height: 9vh;
+    width: 18vw;
     margin: auto;
 }
 
