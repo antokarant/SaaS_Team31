@@ -7,8 +7,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 // Configuration
-const PORT = 3000;
-const HOST = "localhost";
+const port = 3000;
+// const HOST = "localhost";
 const API_LOGIN_URL = "https://saas-team31-soa-login.herokuapp.com";
 const API_SERVER1_URL = "https://saas-team31-soa-questions.herokuapp.com";
 const API_SERVER2_URL = "https://saas-team31-soa-analytics.herokuapp.com";
@@ -106,6 +106,6 @@ app.use('/keyword/popular', createProxyMiddleware({
  }));
 
  // Start the Proxy
-app.listen(PORT, HOST, () => {
-    console.log(`Starting Proxy at ${HOST}:${PORT}`);
+app.listen(process.env.PORT || port, () => {
+    console.log(`Starting Proxy at ${process.env.PORT}`);
  });
