@@ -4,11 +4,11 @@ import { CreateKeywordDto } from './dto/create-keyword.dto';
 import { UpdateKeywordDto } from './dto/update-keyword.dto';
 import { JwtAuthGuard } from '../jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
 @Controller('keyword')
 export class KeywordController {
   constructor(private readonly keywordService: KeywordService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createKeywordDto: CreateKeywordDto) {
     return this.keywordService.create(createKeywordDto);
@@ -19,6 +19,7 @@ export class KeywordController {
     return this.keywordService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.keywordService.findOne(id);
@@ -29,11 +30,13 @@ export class KeywordController {
     return this.keywordService.findMostPopular();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateKeywordDto: UpdateKeywordDto) {
     return this.keywordService.update(id, updateKeywordDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.keywordService.remove(id);

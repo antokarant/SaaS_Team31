@@ -13,7 +13,8 @@ class Question extends React.Component
             responseReceived: false,
             sessionData: null,
             id: this.props.match.params.id,
-            answer: null
+            answer: null,
+            redirect: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -130,6 +131,7 @@ class Question extends React.Component
             .catch(error => {
                 console.error(error);
                 this.props.logoutAction()
+                this.setState({redirect: true})
             });
         }
         else
@@ -142,36 +144,40 @@ class Question extends React.Component
     render()
     {
 
-        return (
-            <div className="App">
-                <div className = "main-window">
+        if(this.state.redirect){
+            return <Redirect to = '/login'/>
+        }
+        else 
+            return (
+                <div className="App">
+                    <div className = "main-window">
 
-                        {this.state.responseReceived ? this.displayQuestion() : <div></div>}
-                        <br />
-                        <br />
-                        {this.state.responseReceived ? this.displayAnswers() : <div></div>}
-                        <form>
-                            <div>
+                            {this.state.responseReceived ? this.displayQuestion() : <div></div>}
+                            <br />
+                            <br />
+                            {this.state.responseReceived ? this.displayAnswers() : <div></div>}
+                            <form>
+                                <div>
+                                    <br />
+                                </div>
                                 <br />
-                            </div>
-                            <br />
-                            <br />
-                            <div>
-                                <label className = "regular-text" >Your answer:</label>
                                 <br />
-                                <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
-                            </div>
-                            <br />
-                            <div className="footnote-wrapper">
-                                <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
-                                    <span className = "regular-text" >Answer</span>
-                                </button>
-                            </div>
-                        </form>
+                                <div>
+                                    <label className = "regular-text" >Your answer:</label>
+                                    <br />
+                                    <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
+                                </div>
+                                <br />
+                                <div className="footnote-wrapper">
+                                    <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
+                                        <span className = "regular-text" >Answer</span>
+                                    </button>
+                                </div>
+                            </form>
+                    </div>
                 </div>
-            </div>
 
-        );
+            );
     }
 }
 

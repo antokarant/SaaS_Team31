@@ -11,6 +11,6 @@
         "migrationsDir": "migration"
     },
     "logging": true,
-    "synchronize": false
+    "synchronize": true
 
 }

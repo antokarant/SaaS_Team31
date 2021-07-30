@@ -14,7 +14,7 @@ export class Answer {
     @UpdateDateColumn()
     updatedOn: Date;
 
-    @Column()
+    @Column({type: 'mediumtext'})
     text: string;
 
     @Column({ default: 0 })
