@@ -9,9 +9,9 @@ const app = express();
 // Configuration
 const PORT = 3000;
 const HOST = "localhost";
-const API_LOGIN_URL = "http://localhost:5000";
-const API_SERVER1_URL = "http://localhost:5001";
-const API_SERVER2_URL = "http://localhost:5002";
+const API_LOGIN_URL = "https://saas-team31-soa-login.herokuapp.com";
+const API_SERVER1_URL = "https://saas-team31-soa-questions.herokuapp.com";
+const API_SERVER2_URL = "https://saas-team31-soa-analytics.herokuapp.com";
 
 
 

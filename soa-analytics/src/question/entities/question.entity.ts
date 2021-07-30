@@ -17,7 +17,7 @@ export class Question {
     @Column()
     title: string;
 
-    @Column()
+    @Column({type: 'mediumtext'})
     description: string;
 
     @Column({ default: 0 })
