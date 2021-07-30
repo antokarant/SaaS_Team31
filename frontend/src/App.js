@@ -47,7 +47,7 @@ class App extends React.Component {
         this.healthcheck()
     }
     healthcheck(){
-        let url = `http://localhost:3000/healthcheck`;
+        let url = `https://saas-team31-soa-esb.herokuapp.com/healthcheck`;
         axios.get(url,
             {
                 headers: {
@@ -96,13 +96,13 @@ class App extends React.Component {
                         </div>
                     </Link>
                         <Link to="/">
-                            <span className="regular-text">
-                                <button onClick={this.logoutCallbackFunction} className="cool-btn">Log out</button>
-                            </span>
+                            <button onClick={this.logoutCallbackFunction} className="cool-btn">
+                                <span className = "regular-text">Log out</span>
+                            </button>
                         </Link>
                         <Link to = "/profile">
                             <button className = "cool-btn">
-                                {this.state.username}
+                                <span className = "regular-text">{this.state.username}</span>
                             </button>
                         </Link>
                     </div>
@@ -142,15 +142,14 @@ class App extends React.Component {
                         </div>
                     </Link>
                         <Link to="/login">
-                            <span className="regular-text">
-                                <button className="cool-btn">Log in</button>
-                            </span>
+                            <button className="cool-btn">
+                                <span className = "regular-text">Log in</span>
+                            </button>
                         </Link>
                         <Link to = "/signup">
-
-                        <button className = "cool-btn">
-                        Sign up
-                        </button>
+                            <button className = "cool-btn">
+                                <span className = "regular-text">Sign up</span>
+                            </button>
                         </Link>
                     </div>
                 </div>
@@ -162,11 +161,11 @@ class App extends React.Component {
                 <Route exact path = "/myanswers" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/myquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
                 <Route exact path = "/profile" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
-                <Route exact path = "/latestquestions" render={props => <Login  loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction} />} />
-                <Route exact path = "/unanswered" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
-                <Route exact path = "/questionsperkeyword" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/latestquestions" render={props => <LatestQuestions logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/unanswered" render={props => <UnansweredQuestions logoutAction={this.logoutCallbackFunction}/>} />
+                <Route exact path = "/questionsperkeyword" render={props => <QuestionsKeyword logoutAction={this.logoutCallbackFunction}/>} />
                 <Route exact path = "/stats" render={props => <Login loginAction={this.loginCallbackFunction} logoutAction={this.logoutCallbackFunction}/>} />
-                <Route path = "/question/:id" render={(props) => <Login logoutAction={this.logoutCallbackFunction} loginAction={this.loginCallbackFunction}/>} />
+                <Route path = "/question/:id" render={(props) => <Question {...props} logoutAction={this.logoutCallbackFunction}/>} />
 
 
                 <div className="media">

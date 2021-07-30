@@ -13,7 +13,8 @@ class Question extends React.Component
             responseReceived: false,
             sessionData: null,
             id: this.props.match.params.id,
-            answer: null
+            answer: null,
+            redirect: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -38,7 +39,7 @@ class Question extends React.Component
 
     fetchQuestion()
     {
-        let url = `http://localhost:3000/question/id/${this.state.id}`;
+        let url = `https://saas-team31-soa-esb.herokuapp.com/question/id/${this.state.id}`;
         axios.get(url,
             {
                 headers: {
@@ -63,14 +64,16 @@ class Question extends React.Component
         return (
             <div>
                 <header>{question.title}</header>
-                <div className = "vote-box">
-                    <div className = "vote-box-positive">{question.upvotes}</div>
-                    <div className = "vote-box-negative">{question.downvotes}</div>
-                </div>
-                <div className = "q-desc-contain">
-                    <span className = "left-text">{question.description}</span>
-                    <span className = "left-text q-desc-details">asked by {question.user.username}</span>
-                    <span className = "q-desc-details">on {question.createdOn.slice(0, 10)}</span>
+                <div className = "q-block">
+                    <div className = "vote-box">
+                        <div className = "vote-box-positive">{question.upvotes}</div>
+                        <div className = "vote-box-negative">{question.downvotes}</div>
+                    </div>
+                    <div className = "q-desc-contain">
+                        <span className = "left-text">{question.description}</span>
+                        <span className = "left-text q-desc-details">asked by {question.user.username}</span>
+                        <span className = "q-desc-details">on {question.createdOn.slice(0, 10)}</span>
+                    </div>
                 </div>
             </div>
         );
@@ -93,7 +96,7 @@ class Question extends React.Component
                             <div key = {answer.id} className = "ans-contain">
                                 <span className = "left-text">{answer.text}</span>
                                 <span className = "left-text ans-details">answered by {answer.user.username}</span>
-                                <span className = "ans-details">on {answer.createdOn.slice(0, 10)}</span>
+                                <span className = "right-text ans-details">on {answer.createdOn.slice(0, 10)}</span>
                             </div>
                         </div>
 
@@ -108,7 +111,7 @@ class Question extends React.Component
 
         if(this.state.answer)
         {
-            let url = `http://localhost:3000/answer`;
+            let url = `https://saas-team31-soa-esb.herokuapp.com/answer`;
 
             axios.post(url,
                 {
@@ -128,6 +131,7 @@ class Question extends React.Component
             .catch(error => {
                 console.error(error);
                 this.props.logoutAction()
+                this.setState({redirect: true})
             });
         }
         else
@@ -140,36 +144,40 @@ class Question extends React.Component
     render()
     {
 
-        return (
-            <div className="App">
-                <div className = "main-window">
+        if(this.state.redirect){
+            return <Redirect to = '/login'/>
+        }
+        else
+            return (
+                <div className="App">
+                    <div className = "main-window">
 
-                        {this.state.responseReceived ? this.displayQuestion() : <div></div>}
-                        <br />
-                        <br />
-                        {this.state.responseReceived ? this.displayAnswers() : <div></div>}
-                        <form>
-                            <div>
+                            {this.state.responseReceived ? this.displayQuestion() : <div></div>}
+                            <br />
+                            <br />
+                            {this.state.responseReceived ? this.displayAnswers() : <div></div>}
+                            <form>
+                                <div>
+                                    <br />
+                                </div>
                                 <br />
-                            </div>
-                            <br />
-                            <br />
-                            <div>
-                                <label className = "regular-text" >Your answer:</label>
                                 <br />
-                                <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
-                            </div>
-                            <br />
-                            <div className="footnote-wrapper">
-                                <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
-                                    <span className = "regular-text" >Answer</span>
-                                </button>
-                            </div>
-                        </form>
+                                <div>
+                                    <label className = "regular-text" >Your answer:</label>
+                                    <br />
+                                    <textarea name = "answer" value={this.state.answer} onChange={this.handleChange}></textarea>
+                                </div>
+                                <br />
+                                <div className="footnote-wrapper">
+                                    <button className="small-btn footnote" onClick = {this.handleAnswerSubmit}>
+                                        <span className = "regular-text" >Answer</span>
+                                    </button>
+                                </div>
+                            </form>
+                    </div>
                 </div>
-            </div>
 
-        );
+            );
     }
 }
 

@@ -41,7 +41,7 @@ class QuestionsKeyword extends React.Component
     fetchQuestions(event)
     {
         event.preventDefault();
-        let url = `http://localhost:3000/question/keyword/${this.state.keyword}`;
+        let url = `https://saas-team31-soa-esb.herokuapp.com/question/keyword/${this.state.keyword}`;
         axios.get(url,
             {
                 headers: {
@@ -80,7 +80,7 @@ class QuestionsKeyword extends React.Component
 
     fetchKeywords()
     {
-        let url = `http://localhost:3000/keyword`;
+        let url = `https://saas-team31-soa-esb.herokuapp.com/keyword`;
         axios.get(url,
             {
                 headers: {
@@ -120,7 +120,7 @@ class QuestionsKeyword extends React.Component
                             <option></option>
                             {this.state.keywordsReceived ? this.keywordOptions() : <div></div>}
                         </select>
-                        {this.state.keyword ? 
+                        {this.state.keyword ?
                         <button className="small-btn" onClick = {this.fetchQuestions}>
                               <span className = "regular-text" >Search</span>
                         </button> : <div></div>}

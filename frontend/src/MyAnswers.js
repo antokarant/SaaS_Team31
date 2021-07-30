@@ -35,7 +35,7 @@ class MyAnswers extends React.Component
 
     fetchAnswers()
     {
-        let url = `http://localhost:3000/answer`;
+        let url = `https://saas-team31-soa-esb.herokuapp.com/answer`;
         axios.get(url,
             {
                 headers: {

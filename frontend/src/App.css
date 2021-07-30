@@ -168,6 +168,10 @@ header {
     font-family: var(--main-font);
 }
 
+.small-text {
+    font-size: 0.8em;
+}
+
 .dropdown {
   display: block;
   font-size: 16px;
@@ -345,21 +349,26 @@ header {
 .chart-container {
     position: relative;
     display: inline-block;
-    height:10vh;
-    width:20vw;
+    height: 9vh;
+    width: 18vw;
     margin: auto;
 }
 
 .left-text {
     text-align: left;
+    margin-left: 3%;
+}
+
+.right-text {
+    text-align: right;
 }
 
 .vote-box {
-    position: relative;
     width: 3%;
     margin: auto;
     display: inline-block;
     /*border: 1px solid black;*/
+    vertical-align: top;
 }
 
 .vote-box-positive {
@@ -384,6 +393,7 @@ header {
     display: inline-block;
     /*border: 1px solid black;*/
     clear: both;
+    width: 90%;
 }
 
 .q-desc-details {
@@ -399,6 +409,7 @@ header {
     display: inline-block;
     /*border: 1px solid black;*/
     clear: both;
+    width: 90%;
 }
 
 .ans-details {
@@ -408,8 +419,27 @@ header {
     clear: both;
 }
 .ans-block {
+    /*border: 1px solid black;*/
+    margin-left: 20%;
+    margin-right: 20%;
     overflow: hidden;
+    margin-bottom: 0.5%;
+}
+.ans-block::after {
+    content: '';
+    width: 100vw;
+    height: 2px;
+    left: 0;
+    display: block;
+    clear: both;
+    background-color: var(--primary-deep);
+}
 
+.q-block {
+    /*border: 1px solid black;*/
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow: hidden;
 }
 
 textarea {
@@ -422,4 +452,21 @@ textarea {
     margin-right: 5%;
     text-align: left;
     position:relative;
+}
+
+.sort-select-area {
+    display: inline-block;
+    width: 65%;
+    vertical-align: top;
+}
+
+.keyword-window {
+    display: inline-block;
+    /*border: 1px solid var(--primary-deep);*/
+}
+
+.inline-elements {
+    display: inline-block;
+    margin-right: 2px;
+    margin-top: 2%;
 }

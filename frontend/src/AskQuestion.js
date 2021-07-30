@@ -17,6 +17,8 @@ class AskQuestion extends React.Component
             keyword2: null,
             keyword3: null,
             infoRequired: false,
+            questionText: null,
+            questionTitle: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -45,7 +47,7 @@ class AskQuestion extends React.Component
 
         if(this.state.questionTitle && this.state.questionText)
         {
-            let url = `http://localhost:3000/question`;
+            let url = `https://saas-team31-soa-esb.herokuapp.com/question`;
             let keywords = []
             if(this.state.keyword1 !== null)
                 keywords.push({"name": this.state.keyword1})
@@ -79,7 +81,7 @@ class AskQuestion extends React.Component
         }
     }
     fetchKeywords(){
-        let url = `http://localhost:3000/keyword`;
+        let url = `https://saas-team31-soa-esb.herokuapp.com/keyword`;
         axios.get(url,
             {
                 headers: {
