@@ -39,7 +39,7 @@ class Question extends React.Component
 
     fetchQuestion()
     {
-        let url = `http://localhost:5000/question/id/${this.state.id}`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/question/id/${this.state.id}`;
         axios.get(url,
             {
                 headers: {
@@ -111,7 +111,7 @@ class Question extends React.Component
 
         if(this.state.answer)
         {
-            let url = `http://localhost:5000/answer`;
+            let url = `https://saas-team31-mvc-backend.herokuapp.com/answer`;
 
             axios.post(url,
                 {
@@ -147,7 +147,7 @@ class Question extends React.Component
         if(this.state.redirect){
             return <Redirect to = '/login'/>
         }
-        else 
+        else
             return (
                 <div className="App">
                     <div className = "main-window">

@@ -47,7 +47,7 @@ class App extends React.Component {
         this.healthcheck()
     }
     healthcheck(){
-        let url = `http://localhost:5000/healthcheck`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/healthcheck`;
         axios.get(url,
             {
                 headers: {

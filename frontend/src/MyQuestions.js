@@ -40,7 +40,7 @@ class MyQuestions extends React.Component
 
     fetchQuestions()
     {
-        let url = `http://localhost:5000/question/user`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/question/user`;
         axios.get(url,
             {
                 headers: {

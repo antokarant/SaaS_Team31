@@ -82,7 +82,7 @@ class UserStatistics extends React.Component
 
     fetchAnswers()
     {
-        let url = `http://localhost:5000/answer`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/answer`;
         axios.get(url,
             {
                 headers: {
@@ -111,7 +111,7 @@ class UserStatistics extends React.Component
 
     fetchQuestions()
     {
-        let url = `http://localhost:5000/question/user`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/question/user`;
         axios.get(url,
             {
                 headers: {

@@ -44,10 +44,10 @@ class AskQuestion extends React.Component
     handleSubmit(e)
     {
         e.preventDefault();
-        
+
         if(this.state.questionTitle && this.state.questionText)
         {
-            let url = `http://localhost:5000/question`;
+            let url = `https://saas-team31-mvc-backend.herokuapp.com/question`;
             let keywords = []
             if(this.state.keyword1 !== null)
                 keywords.push({"name": this.state.keyword1})
@@ -81,7 +81,7 @@ class AskQuestion extends React.Component
         }
     }
     fetchKeywords(){
-        let url = `http://localhost:5000/keyword`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/keyword`;
         axios.get(url,
             {
                 headers: {

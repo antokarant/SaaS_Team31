@@ -34,7 +34,7 @@ class Login extends React.Component
     handleSubmit = (event) =>
     {
         event.preventDefault()
-        let url = `http://localhost:5000/auth/login`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/auth/login`;
         axios.post(url,
             querystring.stringify({
                 "username": this.state.givenName,

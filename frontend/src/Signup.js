@@ -36,8 +36,8 @@ class Signup extends React.Component
         event.preventDefault()
         if((!(this.state.givenName && this.state.givenPassword && this.state.givenPassword2)) || !(this.state.givenPassword === this.state.givenPassword2)){
             this.setState({error: true})
-        }else {      
-            let url = `http://localhost:5000/user`;
+        }else {
+            let url = `https://saas-team31-mvc-backend.herokuapp.com/user`;
             axios.post(url,
                 querystring.stringify({
                     "username": this.state.givenName,
@@ -50,7 +50,7 @@ class Signup extends React.Component
                 this.setState({token: null, loggedIn: false, error2: true})
             });
             return ;
-            
+
         }
     }
     handleChange(event)
@@ -97,7 +97,7 @@ class Signup extends React.Component
                                     <tr>{this.state.error2?"Account with same username already exists":""}</tr>
 
                                 </table>
-                            </form>  
+                            </form>
                         </div>
                         (After successfully signing up you need to login to your account)
                     </div>

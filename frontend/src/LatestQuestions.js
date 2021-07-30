@@ -46,7 +46,7 @@ class LatestQuestions extends React.Component
 
     fetchPopularQuestions()
     {
-        let url = `http://localhost:5000/question/popular`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/question/popular`;
         axios.get(url,
             {
                 headers: {
@@ -67,7 +67,7 @@ class LatestQuestions extends React.Component
 
     fetchLatestQuestions()
     {
-        let url = `http://localhost:5000/question/latest`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/question/latest`;
         axios.get(url,
             {
                 headers: {
@@ -88,7 +88,7 @@ class LatestQuestions extends React.Component
 
     fetchPopularKeywords()
     {
-        let url = `http://localhost:5000/keyword/popular`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/keyword/popular`;
         axios.get(url,
             {
                 headers: {

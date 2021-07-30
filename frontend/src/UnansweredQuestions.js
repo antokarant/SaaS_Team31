@@ -36,7 +36,7 @@ class UnansweredQuestions extends React.Component
 
     fetchQuestions()
     {
-        let url = `http://localhost:5000/question/unanswered`;
+        let url = `https://saas-team31-mvc-backend.herokuapp.com/question/unanswered`;
         axios.get(url,
             {
                 headers: {
