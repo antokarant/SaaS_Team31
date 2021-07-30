@@ -6,9 +6,9 @@
     --background: #C8EEF9;
     /* THE ABOVE ARE NOT BEING USED AT THE MOMENT */
 
-    --primary-deep: #103C5F;
+    --primary-deep: #103C5F; /* 10 59 95 */
     --primary-light: #55BDCA;
-    --secondary-deep: #DF622C;
+    --secondary-deep: #DF622C; /* 223 98 55 */
     --secondary-light: #F07C41;
 
     --main-font: "Comic Sans MS", sans-serif;
@@ -30,7 +30,7 @@
   margin-left: 2%;
   margin-right: 2%;
   font-family: var(--main-font);
-  overflow: auto;
+  overflow: none;
     position: relative;
     height:80%;
 }
@@ -45,19 +45,17 @@
     padding-bottom: 1%;
 
     font-family: var(--main-font);
-    overflow: auto;
+    overflow: none;
 }
 
-.header {
-  /*width: 100%;
-  height: 5%;*/
-  background-color: var(--primary-deep);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
+header {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .closeButton {
@@ -94,13 +92,15 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.user-form{
+
+.user-form {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     height: 100%;
 }
+
 .cool-btn:hover {
     background-color: var(--secondary-deep);
 }
@@ -168,6 +168,10 @@
     font-family: var(--main-font);
 }
 
+.small-text {
+    font-size: 0.8em;
+}
+
 .dropdown {
   display: block;
   font-size: 16px;
@@ -176,8 +180,8 @@
   color: #444;
   line-height: 1.3;
   padding: .6em 1.4em .5em .8em;
-  width: 100%;
-  max-width: 100%;
+  width: 30%;
+  max-width: 30%;
   box-sizing: border-box;
   margin: 0;
   border: 1px solid #aaa;
@@ -213,13 +217,21 @@
 
 .main-window {
     display: block;
-    height: 55%;
+    height: 85%;
+    overflow: auto;
 
 
 }
+.main-window2 {
+    display: block;
+    height: 85%;
+    overflow: hidden;
+
+}
+
 
 .main-area {
-    margin-left: 5%;
+    margin-left: 10%;
     margin-right: 5%;
     padding-top: 3%;
 
@@ -227,8 +239,7 @@
     /*border: 2px solid red;*/
     overflow: hidden;
     position:relative;
-    height: 90%;
-
+    height: 85%;
 }
 
 .box {
@@ -236,7 +247,7 @@
     height: 20px;
 }
 
-textarea {
+.textarea {
     width: 100%;
     box-sizing: border-box;
     height: 10em;
@@ -244,8 +255,9 @@ textarea {
 }
 
 .text-field {
-    width: 100%;
+    width: 80%;
     box-sizing: border-box;
+    display: block;
 }
 
 .user-form {
@@ -271,4 +283,190 @@ textarea {
 
 .big-box:hover {
     background-color: var(--secondary-deep);
+}
+
+.qa-fetch-result {
+    width: 60%;
+    height: 450px;
+    /*background-color: black;*/
+    /*color: white;*/
+    overflow-y: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.qa-block {
+    border: 2px solid var(--primary-deep);
+    border-radius: 10px;
+    /*width: 60%;*/
+    margin: 10px auto;
+}
+
+.qa-block:hover {
+    cursor: pointer;
+}
+
+.qa-block:hover .qa-block-title {
+    text-decoration: underline;
+}
+
+.qa-block-title {
+    font-weight: bold;
+    clear: both;
+}
+
+.qa-block-keywords {
+    position: relative;
+    clear: both;
+}
+
+.keyword-box {
+    display: inline-block;
+    font-size: 0.8em;
+    border-radius: 8px;
+    background-color: var(--primary-deep);
+    color: white;
+    padding: 2px;
+    margin: 2px;
+}
+
+.qa-block-details {
+    position: relative;
+    font-style: italic;
+}
+
+.link-text {
+    color: inherit;
+    text-decoration: none;
+}
+
+.label-block {
+    clear: both;
+}
+
+.chart-container {
+    position: relative;
+    display: inline-block;
+    height: 9vh;
+    width: 18vw;
+    margin: auto;
+}
+
+.left-text {
+    text-align: left;
+    margin-left: 3%;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.vote-box {
+    width: 3%;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+    vertical-align: top;
+}
+
+.vote-box-positive {
+    border: 1px solid darkgreen;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.vote-box-negative {
+    border: 1px solid darkred;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkred;
+    background-color: pink;
+}
+
+.q-desc-contain {
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+    clear: both;
+    width: 90%;
+}
+
+.q-desc-details {
+    position: relative;
+    display: block;
+    font-style: italic;
+    clear: both;
+}
+
+.ans-contain {
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    /*border: 1px solid black;*/
+    clear: both;
+    width: 90%;
+}
+
+.ans-details {
+    position: relative;
+    display: block;
+    font-style: italic;
+    clear: both;
+}
+.ans-block {
+    /*border: 1px solid black;*/
+    margin-left: 20%;
+    margin-right: 20%;
+    overflow: hidden;
+    margin-bottom: 0.5%;
+}
+.ans-block::after {
+    content: '';
+    width: 100vw;
+    height: 2px;
+    left: 0;
+    display: block;
+    clear: both;
+    background-color: var(--primary-deep);
+}
+
+.q-block {
+    /*border: 1px solid black;*/
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow: hidden;
+}
+
+textarea {
+    width: 80%;
+    resize: none;
+}
+
+.main-area-quick-fix {
+    margin-left: 10%;
+    margin-right: 5%;
+    text-align: left;
+    position:relative;
+}
+
+.sort-select-area {
+    display: inline-block;
+    width: 65%;
+    vertical-align: top;
+}
+
+.keyword-window {
+    display: inline-block;
+    /*border: 1px solid var(--primary-deep);*/
+}
+
+.inline-elements {
+    display: inline-block;
+    margin-right: 2px;
+    margin-top: 2%;
 }

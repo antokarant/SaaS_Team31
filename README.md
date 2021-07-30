@@ -1,2 +1,2 @@
-# SaaS_team31
-SaaS project 2021 - team31
+# SaaS Team 31 
+NTUA SaaS project 2021 
