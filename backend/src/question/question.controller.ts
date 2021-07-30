@@ -8,6 +8,7 @@ import { JwtAuthGuard } from '../jwt-auth.guard';
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createQuestionDto: CreateQuestionDto,@Request() req) {
     createQuestionDto.user = {"id": req.user.id}
