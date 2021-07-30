@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 )
 
 cur = mydb.cursor()
-''' 
+
 ## Insert questions
 qid = 505
 with open("presquestions.json", 'r') as f:
@@ -20,7 +20,6 @@ with open("presquestions.json", 'r') as f:
         cur.execute(query)
         mydb.commit()
         qid += 10
-mydb.close()
   
 ## Insert question keyword relations
 qid = 505
@@ -32,7 +31,9 @@ with open("presquestions.json", 'r') as f:
             cur.execute(query)
             mydb.commit()
         qid += 10
-'''      
+
+mydb.close()
+
 ## Insert answers
 url = 'http://localhost:5000/answer'
 with open("presanswers.json", 'r') as f:

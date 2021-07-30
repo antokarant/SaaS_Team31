@@ -49,7 +49,9 @@ with open("questions.json", 'r') as f:
             cur.execute(query)
             mydb.commit()
         qid += 10
-        
+ 
+mydb.close()
+ 
 ## Insert answers
 url = 'http://localhost:5000/answer'
 with open("answers.json", 'r') as f:
