@@ -59,6 +59,7 @@ class UserStatistics extends React.Component
         let length = 4;
         let latestMonths = new Array(length);
         let d = new Date(Date.now());
+        d.setDate(1); // set day to one that all months have, because setMonth will be used next
         // extract YYYY-MM from date string
         let m = d.getMonth() + 1; // January is 0
         m = m.toString();
